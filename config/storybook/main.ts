@@ -15,6 +15,7 @@ const config: StorybookConfig = {
 		"@chromatic-com/storybook",
 		"@storybook/addon-themes",
 		"storybook-react-i18next",
+		"@chromatic-com/storybook",
 		"storybook-addon-mock"
 	],
 	framework: {
