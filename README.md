@@ -10,6 +10,7 @@
 ![Lint](https://github.com/FallenLuc/Advanced-Frontend-Project/actions/workflows/lint.yml/badge.svg?branch=dev)
 ![Unit Test](https://github.com/FallenLuc/Advanced-Frontend-Project/actions/workflows/testUnit.yml/badge.svg?branch=dev)
 ![Ui Test](https://github.com/FallenLuc/Advanced-Frontend-Project/actions/workflows/testUi.yml/badge.svg?branch=dev)
+
 [![Storybook](https://img.shields.io/badge/-Storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white)](https://dev--67f5ebfcaecd9917d7475e3a.chromatic.com)
 
 ## 🚀 Scripts
