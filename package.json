@@ -1,15 +1,14 @@
 {
 	"name": "advanced-frontend-project",
-	"packageManager": "yarn@4.5.0",
 	"version": "1.0.0",
 	"description": "Education Project of Advanced Frontend tech",
 	"main": "index.ts",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/DnD-developer/Advanced-Frontend-Project.git"
+		"url": "git+https://github.com/FallenLuc/Advanced-Frontend-Project.git"
 	},
 	"scripts": {
-		"build:start": "concurrently \"yarn run build:start:dev\" \"yarn run build:start:backend\"",
+		"build:start": "concurrently \"pnpm run build:start:dev\" \"pnpm run build:start:backend\"",
 		"build:start:dev": "webpack serve --env port=8081 mode=development",
 		"build:start:backend": "node ./backend/index.js",
 		"build:dev": "webpack --env mode=development",
@@ -21,14 +20,13 @@
 		"lint:style:fix": "stylelint '**/*{.css,.scss}' --fix",
 		"lint:prettier": "prettier --write **/*{.ts,.tsx,.json,.html,.css,.scss}",
 		"test:unit": "jest --config ./config/jest/jest.config.ts",
-		"test:ui": "chromatic --t chpt_4330b52d5d14286",
+		"test:ui": "chromatic --t chpt_9731fdc1d7719c3",
 		"test:e2e": "cypress open",
 		"storybook:start": "storybook dev -c config/storybook --no-open -p 6006 ",
-		"storybook:build": "storybook build -ci -c config/storybook",
-		"postinstall": "rimraf ./node_modules/.cache"
+		"storybook:build": "storybook build -ci -c config/storybook"
 	},
 	"author": {
-		"name": "Salim Cat"
+		"name": "FallenLuc"
 	},
 	"license": "MIT",
 	"private": true,
@@ -165,7 +163,7 @@
 		"uid": "^2.0.2"
 	},
 	"bugs": {
-		"url": "https://github.com/DnD-developer/Advanced-Frontend-Project/issues"
+		"url": "https://github.com/FallenLuc/Advanced-Frontend-Project/issues"
 	},
-	"homepage": "https://github.com/DnD-developer/Advanced-Frontend-Project#readme"
+	"homepage": "https://github.com/FallenLuc/Advanced-Frontend-Project#readme"
 }
