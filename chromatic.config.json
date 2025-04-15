@@ -3,6 +3,7 @@
 	"zip": true,
 	"buildScriptName": "storybook:build",
 	"storybookConfigDir": "config/storybook",
+	"projectToken": "chpt_9731fdc1d7719c3",
 	"onlyChanged": true,
 	"debug": false
 }

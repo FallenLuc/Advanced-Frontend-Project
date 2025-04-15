@@ -1,0 +1,56 @@
+name: Deploy
+run-name: ${{ github.workflow }}; Trigger ${{ github.ref_name }}; Runner ${{ github.actor }}
+on:
+    workflow_dispatch:
+    pull_request:
+        paths-ignore:
+            - ./**/*.json
+            - .stylelintrc.js
+            - .stylelintignore
+            - .eslintignore
+            - .gitignore
+            - .prettierignore
+            - README.md
+            - yarn.lock
+            - config/**/*
+            - webpack.config.ts
+jobs:
+    build:
+        name: Build
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Prepare environment
+              uses: ./.github/actions/prepare
+
+            - name: Build
+              id: build
+              run: pnpm build:prod
+              shell: bash
+
+            - name: Upload static files as artifact
+              id: deployment
+              uses: actions/upload-pages-artifact@v3
+              with:
+                  path: build/
+            - name: Upload build artifact for release
+              uses: actions/upload-artifact@v4
+              with:
+                  name: release-artifact
+                  path: build/
+    deploy:
+        name: Deploy
+        needs: build
+        permissions:
+            pages: write
+            id-token: write
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        runs-on: ubuntu-latest
+        steps:
+            - name: Deploy to GitHub Page
+              id: deployment
+              uses: actions/deploy-pages@v4

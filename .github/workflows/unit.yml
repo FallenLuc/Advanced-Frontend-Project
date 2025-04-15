@@ -1,4 +1,4 @@
-name: Lint
+name: Unit
 run-name: ${{ github.workflow }}; Trigger ${{ github.ref_name }}; Runner ${{ github.actor }}
 on:
     workflow_dispatch:
@@ -15,10 +15,9 @@ on:
             - yarn.lock
             - config/**/*
             - webpack.config.ts
-
 jobs:
-    lintTs:
-        name: Lint TypeScript
+    unitTest:
+        name: Unit Test
         runs-on: ubuntu-latest
         strategy:
             matrix:
@@ -30,23 +29,6 @@ jobs:
             - name: Prepare environment
               uses: ./.github/actions/prepare
 
-            - name: Lint TypeScript
-              run: pnpm lint:ts
-              shell: bash
-
-    lintStyle:
-        name: Lint Style
-        runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                node-version: [20]
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v4
-
-            - name: Prepare environment
-              uses: ./.github/actions/prepare
-
-            - name: Lint Style
-              run: pnpm lint:style
+            - name: test
+              run: pnpm test:unit
               shell: bash
