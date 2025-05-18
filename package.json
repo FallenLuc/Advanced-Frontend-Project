@@ -5,8 +5,9 @@
 	"main": "index.ts",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/FallenLuc/Advanced-Frontend-Project.git"
+		"url": "https://github.com/FallenLuc/Advanced-Frontend-Project.git"
 	},
+	"homepage": "https://fallenLuc.github.io/Advanced-Frontend-Project/",
 	"scripts": {
 		"build:start": "concurrently \"pnpm run build:start:dev\" \"pnpm run build:start:backend\"",
 		"build:start:dev": "webpack serve --env port=8081 mode=development",
@@ -20,7 +21,7 @@
 		"lint:style:fix": "stylelint '**/*{.css,.scss}' --fix",
 		"lint:prettier": "prettier --write **/*{.ts,.tsx,.json,.html,.css,.scss}",
 		"test:unit": "jest --config ./config/jest/jest.config.ts",
-		"test:ui": "chromatic --t chpt_9731fdc1d7719c3",
+		"test:ui": "chromatic",
 		"test:e2e": "cypress open",
 		"storybook:start": "storybook dev -c config/storybook --no-open -p 6006 ",
 		"storybook:build": "storybook build -ci -c config/storybook"
@@ -160,10 +161,10 @@
 		"react-redux": "^9.1.1",
 		"react-router": "^6.22.3",
 		"react-router-dom": "^6.22.3",
+		"sass-migrator": "^2.3.1",
 		"uid": "^2.0.2"
 	},
 	"bugs": {
 		"url": "https://github.com/FallenLuc/Advanced-Frontend-Project/issues"
-	},
-	"homepage": "https://github.com/FallenLuc/Advanced-Frontend-Project#readme"
+	}
 }
