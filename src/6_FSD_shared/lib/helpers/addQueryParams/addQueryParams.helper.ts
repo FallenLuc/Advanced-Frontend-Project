@@ -14,6 +14,12 @@ export function createQueryParams<T extends string | number>(params?: paramsType
 	return `?${searchParams}`
 }
 
-export function addQueryParams<T extends string | number>(params?: paramsType<T>) {
-	window.history.pushState(undefined, "", createQueryParams(params))
+/**
+ * Обновляет адрес страницы, добавляя поля переданного объекта в качестве url параметров.
+ * @param {paramsType<T>} params - объект поля которого станут url парамeтрами
+ * @param {string} link - базовая ссылка
+ */
+
+export function addQueryParams<T extends string | number>(params?: paramsType<T>, link?: string) {
+	window.history.pushState({}, "", `#${link || "/"}${createQueryParams(params)}`)
 }
