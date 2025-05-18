@@ -2,7 +2,6 @@ name: Deploy
 run-name: ${{ github.workflow }}; Trigger ${{ github.ref_name }}; Runner ${{ github.actor }}
 on:
     workflow_dispatch:
-    push:
     pull_request:
         paths-ignore:
             - ./**/*.json
