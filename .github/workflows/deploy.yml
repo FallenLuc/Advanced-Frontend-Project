@@ -27,7 +27,7 @@ jobs:
 
             - name: Build
               id: build
-              run: pnpm build:prod
+              run: pnpm webpack --env mode=production apiUrl=${{secrets.API_URL}}
               shell: bash
 
             - name: Upload static files as artifact
