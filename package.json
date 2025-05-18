@@ -7,7 +7,7 @@
 		"type": "git",
 		"url": "https://github.com/FallenLuc/Advanced-Frontend-Project.git"
 	},
-	"homepage": "https://fallenLuc.github.io/Advanced-Frontend-Project",
+	"homepage": "https://fallenLuc.github.io/Advanced-Frontend-Project/",
 	"scripts": {
 		"build:start": "concurrently \"pnpm run build:start:dev\" \"pnpm run build:start:backend\"",
 		"build:start:dev": "webpack serve --env port=8081 mode=development",
