@@ -11,9 +11,9 @@
 ![Unit Test](https://github.com/FallenLuc/Advanced-Frontend-Project/actions/workflows/testUnit.yml/badge.svg?branch=dev)
 ![Ui Test](https://github.com/FallenLuc/Advanced-Frontend-Project/actions/workflows/testUi.yml/badge.svg?branch=dev)
 
-[![Storybook](https://img.shields.io/badge/-Storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white)](https://dev--67f5ebfcaecd9917d7475e3a.chromatic.com) <- **LINK**
+[![Storybook](https://img.shields.io/badge/-Storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white)](https://dev--67f5ebfcaecd9917d7475e3a.chromatic.com)  <- **LINK**
 
-[![Github Pages](https://img.shields.io/badge/github%20pages-121013?style=for-the-badge&logo=github&logoColor=white)](https://fallenluc.github.io/RailwayTicketBookingSystem/) <- **LINK**
+[![Github Pages](https://img.shields.io/badge/github%20pages-121013?style=for-the-badge&logo=github&logoColor=white)](https://fallenluc.github.io/Advanced-Frontend-Project/)  <- **LINK**
 
 ## 🚀 Scripts
 
