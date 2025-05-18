@@ -14,7 +14,10 @@ i18n.use(detector)
 		backend: {
 			backendOptions: [
 				{
-					loadPath: "/locales/{{lng}}/{{ns}}.json"
+					loadPath:
+						__IS_DEV__ ?
+							"/locales/{{lng}}/{{ns}}.json"
+						:	"/Advanced-Frontend-Project/locales/{{lng}}/{{ns}}.json"
 				}
 			]
 		}
