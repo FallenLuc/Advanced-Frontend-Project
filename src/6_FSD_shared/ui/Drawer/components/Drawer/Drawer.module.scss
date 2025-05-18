@@ -1,4 +1,6 @@
-@import "@app/styles/vars/globals.var";
+@use "@app/styles/vars/globals";
+
+$value-header-height: globals.$header-height;
 
 .Drawer {
 	display: flex;
@@ -15,7 +17,7 @@
 	z-index: var(--z-index-modal);
 	left: 2vw;
 	width: 96vw;
-	height: calc(100vh + $header-height);
+	height: calc(100vh + $value-header-height);
 	padding: 15px;
 
 	border-radius: 12px 12px 0;
