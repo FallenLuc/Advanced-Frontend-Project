@@ -1,8 +1,8 @@
-@import "reset";
-@import "vars/globals.var";
-@import "themes/dark";
-@import "themes/light";
-@import "themes/green";
+@use "reset";
+@use "vars/globals";
+@use "themes/dark";
+@use "themes/light";
+@use "themes/green";
 
 .page-header {
 	margin-top: 30px;

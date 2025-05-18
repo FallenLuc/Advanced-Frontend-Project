@@ -25,7 +25,7 @@ export const Header = memo<HeaderProps>(props => {
 
 	const [isAuthModal, setIsAuthModal] = useState(false)
 
-	const { authData } = useAuth()
+	const { authData, isAdmin } = useAuth()
 
 	const loginModalShow = useCallback(() => {
 		setIsAuthModal(true)
@@ -79,7 +79,7 @@ export const Header = memo<HeaderProps>(props => {
 						inverted={true}
 					/>
 
-					{authData ?
+					{isAdmin ?
 						<AppLink
 							theme={AppLinkTheme.OUTLINE}
 							className={styles.createLink}
