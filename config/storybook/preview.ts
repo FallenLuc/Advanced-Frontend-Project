@@ -23,7 +23,7 @@ const preview: Preview = {
 			disable: true
 		},
 		controls: {
-			exclude: ["className", "classNames"]
+			exclude: ["className", "classNames", "data-testid"]
 		},
 		i18n
 	},
