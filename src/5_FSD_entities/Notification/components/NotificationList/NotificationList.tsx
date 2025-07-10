@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next"
 import { useGetNotificationQuery } from "../../api/fetchNotifications.rtkq"
 import { NotificationItem } from "../NotificationItem/NotificationItem"
 import styles from "./NotificationList.module.scss"
+import { useAuth } from "../../../User"
 
 type NotificationListProps = {
 	className?: string
@@ -16,8 +17,10 @@ export const NotificationList = memo<NotificationListProps>(props => {
 
 	const { t } = useTranslation()
 
+	const { authData } = useAuth()
+
 	const { isLoading, error, data } = useGetNotificationQuery(
-		undefined,
+		authData?.id,
 		useMemo(
 			() => ({
 				pollingInterval: 20000
