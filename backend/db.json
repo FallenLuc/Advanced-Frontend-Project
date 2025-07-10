@@ -34,16 +34,8 @@
 		}
 	],
 	"posts": [
-		{
-			"id": "1",
-			"title": "json-server",
-			"userId": 1
-		},
-		{
-			"id": "2",
-			"title": "json-server",
-			"userId": 2
-		}
+		{ "id": "1", "title": "json-server", "userId": 1 },
+		{ "id": "2", "title": "json-server", "userId": 2 }
 	],
 	"users": [
 		{
@@ -51,13 +43,8 @@
 			"userName": "Lucifer",
 			"password": "123",
 			"roles": ["USER", "ADMIN"],
-			"features": {
-				"isFeatureRating": true,
-				"isFeatureComments": true
-			},
-			"settings": {
-				"theme": "app-green-theme"
-			},
+			"features": { "isFeatureRating": true, "isFeatureComments": true },
+			"settings": { "theme": "app-green-theme" },
 			"avatar": "https://i.pinimg.com/originals/f0/f8/fe/f0f8fe0e76824fd544a9154b995fb01d.jpg"
 		},
 		{
@@ -65,13 +52,8 @@
 			"userName": "Alice",
 			"password": "123",
 			"roles": ["USER"],
-			"features": {
-				"isFeatureRating": false,
-				"isFeatureComments": true
-			},
-			"settings": {
-				"theme": "app-dark-theme"
-			},
+			"features": { "isFeatureRating": false, "isFeatureComments": true },
+			"settings": { "theme": "app-dark-theme" },
 			"avatar": "https://i.pinimg.com/originals/05/86/f5/0586f507c54a52dc0542a"
 		},
 		{
@@ -79,13 +61,8 @@
 			"userName": "Admin Test User",
 			"password": "123",
 			"roles": ["USER", "ADMIN"],
-			"features": {
-				"isFeatureRating": false,
-				"isFeatureComments": false
-			},
-			"settings": {
-				"theme": "app-dark-theme"
-			},
+			"features": { "isFeatureRating": false, "isFeatureComments": false },
+			"settings": { "theme": "app-dark-theme" },
 			"avatar": "https://i.pinimg.com/originals/f0/f8/fe/f0f8fe0e76824fd544a9154b995fb01d.jpg"
 		},
 		{
@@ -93,14 +70,18 @@
 			"userName": "Test User",
 			"password": "123",
 			"roles": ["USER"],
-			"features": {
-				"isFeatureRating": true,
-				"isFeatureComments": false
-			},
-			"settings": {
-				"theme": "app-dark-theme"
-			},
+			"features": { "isFeatureRating": true, "isFeatureComments": false },
+			"settings": { "theme": "app-dark-theme" },
 			"avatar": "https://i.pinimg.com/originals/f0/f8/fe/f0f8fe0e76824fd544a9154b995fb01d.jpg"
+		},
+		{
+			"id": "9c556d97",
+			"userName": "Nikita",
+			"password": "321",
+			"roles": ["USER"],
+			"features": { "isFeatureRating": true, "isFeatureComments": true },
+			"settings": { "theme": "app-dark-theme" },
+			"avatar": ""
 		}
 	],
 	"profile": [
@@ -125,6 +106,17 @@
 			"userName": "Alice",
 			"avatar": "https://i.pinimg.com/originals/05/86/f5/0586f507c54a52dc0542a",
 			"id": "2"
+		},
+		{
+			"firstName": "Nikita",
+			"lastName": "",
+			"age": 0,
+			"currency": "RUB",
+			"country": "Russia",
+			"city": "",
+			"userName": "Nikita",
+			"avatar": "",
+			"id": "9c556d97"
 		}
 	],
 	"articles": [
@@ -596,95 +588,22 @@
 		}
 	],
 	"comments": [
-		{
-			"id": "1",
-			"text": "some comment",
-			"articleId": "1",
-			"userId": "1"
-		},
-		{
-			"id": "2",
-			"text": "some comment 2",
-			"articleId": "1",
-			"userId": "2"
-		},
-		{
-			"id": "3",
-			"text": "some comment 3",
-			"articleId": "1",
-			"userId": "1"
-		},
-		{
-			"text": "",
-			"id": "lucifer1",
-			"articleId": "1",
-			"userId": "1"
-		},
-		{
-			"text": "Top Article",
-			"id": "Top ArticleLucifer5",
-			"articleId": "5",
-			"userId": "1"
-		},
-		{
-			"text": "Asdf",
-			"id": "AsdfAlice1",
-			"articleId": "1",
-			"userId": "2"
-		},
-		{
-			"text": "asd",
-			"id": "asdAlice1",
-			"articleId": "1",
-			"userId": "2"
-		},
-		{
-			"text": "adf",
-			"id": "adfAlice1",
-			"articleId": "1",
-			"userId": "2"
-		},
-		{
-			"text": "Thus jklasdf",
-			"id": "Thus jklasdfLucifer5",
-			"articleId": "5",
-			"userId": "1"
-		},
-		{
-			"text": "adsfsadf",
-			"id": "adsfsadfLucifer5",
-			"articleId": "5",
-			"userId": "1"
-		},
-		{
-			"text": "aadsfadf",
-			"id": "aadsfadfLucifer5",
-			"articleId": "5",
-			"userId": "1"
-		}
+		{ "id": "1", "text": "some comment", "articleId": "1", "userId": "1" },
+		{ "id": "2", "text": "some comment 2", "articleId": "1", "userId": "2" },
+		{ "id": "3", "text": "some comment 3", "articleId": "1", "userId": "1" },
+		{ "text": "", "id": "lucifer1", "articleId": "1", "userId": "1" },
+		{ "text": "Top Article", "id": "Top ArticleLucifer5", "articleId": "5", "userId": "1" },
+		{ "text": "Asdf", "id": "AsdfAlice1", "articleId": "1", "userId": "2" },
+		{ "text": "asd", "id": "asdAlice1", "articleId": "1", "userId": "2" },
+		{ "text": "adf", "id": "adfAlice1", "articleId": "1", "userId": "2" },
+		{ "text": "Thus jklasdf", "id": "Thus jklasdfLucifer5", "articleId": "5", "userId": "1" },
+		{ "text": "adsfsadf", "id": "adsfsadfLucifer5", "articleId": "5", "userId": "1" },
+		{ "text": "aadsfadf", "id": "aadsfadfLucifer5", "articleId": "5", "userId": "1" }
 	],
 	"article-ratings": [
-		{
-			"id": "1",
-			"rate": 4,
-			"feedback": "Хорошая статья",
-			"userId": "1",
-			"articleId": "1"
-		},
-		{
-			"id": "2",
-			"rate": 4,
-			"feedback": "Хорошая статья",
-			"userId": "1",
-			"articleId": "2"
-		},
-		{
-			"id": "fa56715ab60",
-			"articleId": "6",
-			"userId": "1",
-			"rate": 1,
-			"feedback": "asdfasdf"
-		},
+		{ "id": "1", "rate": 4, "feedback": "Хорошая статья", "userId": "1", "articleId": "1" },
+		{ "id": "2", "rate": 4, "feedback": "Хорошая статья", "userId": "1", "articleId": "2" },
+		{ "id": "fa56715ab60", "articleId": "6", "userId": "1", "rate": 1, "feedback": "asdfasdf" },
 		{
 			"id": "291a2bf424f",
 			"articleId": "5",
@@ -692,13 +611,7 @@
 			"rate": 3,
 			"feedback": "asdfadsfs"
 		},
-		{
-			"id": "91a2bf424f9",
-			"articleId": "12",
-			"userId": "1",
-			"rate": 3,
-			"feedback": "adfasdf"
-		},
+		{ "id": "91a2bf424f9", "articleId": "12", "userId": "1", "rate": 3, "feedback": "adfasdf" },
 		{
 			"id": "1a2bf424f9e",
 			"articleId": "10",
@@ -706,13 +619,7 @@
 			"rate": 2,
 			"feedback": "asdfadsf"
 		},
-		{
-			"id": "d6cd52558b9",
-			"articleId": "9",
-			"userId": "1",
-			"rate": 2,
-			"feedback": "adsfas"
-		},
+		{ "id": "d6cd52558b9", "articleId": "9", "userId": "1", "rate": 2, "feedback": "adsfas" },
 		{
 			"id": "19344982e54",
 			"articleId": "17",
