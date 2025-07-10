@@ -55,17 +55,16 @@ server.post("/login", (req, res) => {
 server.post("/signUp", (req, res) => {
 	try {
 		const { userName, password } = req.body
-		const db = JSON.parse(fs.readFileSync(path.resolve(__dirname, "db.json"), "UTF-8"))
 
-		const checkUser = db.users?.some(
-			user => user.userName === userName && user.password === password
-		)
+		const db = router.db
 
-		if (checkUser) {
+		const existingUser = db.get("users").find({ userName, password }).value()
+
+		if (existingUser) {
 			return res.status(403).json({ message: "User already registered" })
 		}
 
-		const user = {
+		const newUser = {
 			id: uid.uid(8),
 			userName: userName,
 			password: password,
@@ -80,40 +79,23 @@ server.post("/signUp", (req, res) => {
 			avatar: ""
 		}
 
-		db.users.push(user)
+		db.get("users").push(newUser).write()
 
-		db.profile.push({
-			firstName: user.userName,
-			lastName: "",
-			age: 0,
-			currency: "RUB",
-			country: "Russia",
-			city: "",
-			userName: user.userName,
-			avatar: "",
-			id: user.id
-		})
-
-		fs.writeFileSync(path.resolve(__dirname, "db.json"), JSON.stringify(db), "UTF-8")
-
-		const newDb = JSON.parse(fs.readFileSync(path.resolve(__dirname, "db.json"), "UTF-8"))
-
-		const userFromBd = newDb?.users?.find(
-			user => user.userName === userName && user.password === password
-		)
-
-		if (userFromBd) {
-			return res.json({
-				userName: userFromBd.userName,
-				id: userFromBd.id,
-				avatar: userFromBd.avatar,
-				roles: userFromBd.roles,
-				features: userFromBd.features,
-				settings: userFromBd.settings
+		db.get("profile")
+			.push({
+				firstName: newUser.userName,
+				lastName: "",
+				age: 0,
+				currency: "RUB",
+				country: "Russia",
+				city: "",
+				userName: newUser.userName,
+				avatar: "",
+				id: newUser.id
 			})
-		}
+			.write()
 
-		return res.status(403).json({ message: "User not register" })
+		return res.json(newUser)
 	} catch (e) {
 		console.log(e)
 		return res.status(500).json({ message: e.message })

@@ -7,12 +7,13 @@ import { Button, ButtonTheme } from "@ui/Button"
 import type { asyncReducersList } from "@hooks/useAsyncReducer.hook"
 import { useAsyncReducer } from "@hooks/useAsyncReducer.hook"
 import { registerFormReducer, useRegisterFormReducer } from "../../store/slices/registerForm.slice"
-import { useCallback, type FormEvent } from "react"
+import { useCallback, type FormEvent, useEffect } from "react"
 import { useGetRegisterFormSelector } from "../../store/selectors/getRegisterForm/getRegisterForm.selector"
 import { useCreateNewUserMutation } from "../../api/createNewUser.rtkq"
 import { Text, TextTheme } from "@ui/Text"
 import { Input } from "@ui/Input"
 import { useAuth } from "@entities/User"
+import { useAppDispatch } from "@hooks/useAppDispatch.hook"
 
 export type RegistrationFormProps = {
 	className?: string
@@ -30,30 +31,34 @@ const RegistrationForm = TypedMemo((props: RegistrationFormProps) => {
 	const { setAuthData } = useAuth()
 
 	const { t } = useTranslation()
+	const dispatch = useAppDispatch()
 
 	const [createUser, { isError, isLoading, data, isSuccess }] = useCreateNewUserMutation()
+
+	useEffect(() => {
+		if (__PROJECT__ !== "storybook") {
+			if (isSuccess) {
+				dispatch(setAuthData(data))
+				onSuccess?.()
+			}
+		}
+		//eslint-disable-next-line
+	}, [isSuccess])
 
 	const registrationForm = useGetRegisterFormSelector()
 	const { updateUserName, updatePassword, resetForm } = useRegisterFormReducer()
 
 	const onSubmit = useCallback(
-		async (event: FormEvent<HTMLFormElement>) => {
+		(event: FormEvent<HTMLFormElement>) => {
 			event.preventDefault()
 
 			if (registrationForm) {
-				await createUser(registrationForm)
-			}
-
-			if (__PROJECT__ !== "storybook") {
-				if (isSuccess) {
-					setAuthData(data)
-					onSuccess?.()
-				}
+				createUser(registrationForm)
 			}
 
 			resetForm()
 		},
-		[createUser, data, isSuccess, onSuccess, registrationForm, resetForm, setAuthData]
+		[createUser, registrationForm, resetForm]
 	)
 
 	const onChangeUserName = useCallback(
