@@ -67,9 +67,8 @@ const LoginForm = memo<LoginFormProps>(props => {
 
 				if (result.meta.requestStatus === "fulfilled") {
 					onSuccess?.()
+					dispatch(resetForm())
 				}
-
-				dispatch(resetForm())
 			}
 		},
 		[dispatch, onSuccess, password, resetForm, userName]

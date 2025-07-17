@@ -53,7 +53,7 @@ const ArticleDetailsPage = memo<ArticleDetailsPageProps>(props => {
 	} else if (id || testId) {
 		element = (
 			<VStack gap={"gap24"}>
-				{authData?.id === articleData?.user.id ?
+				{authData?.id === articleData?.user.id && authData?.id !== undefined ?
 					<AppLink
 						className={styles.header}
 						to={toArticleEdit}

@@ -24,7 +24,14 @@ export default meta
 type TypeStory = StoryObj<typeof LoginModal>
 
 export const Default: TypeStory = {
-	decorators: [StoreDecorator({}, { loginForm: loginFormReducer })]
+	decorators: [
+		StoreDecorator(
+			{
+				loginForm: { isLoading: false, data: { userName: "admin", password: "123" } }
+			},
+			{ loginForm: loginFormReducer }
+		)
+	]
 }
 
 export const Loading: TypeStory = {
