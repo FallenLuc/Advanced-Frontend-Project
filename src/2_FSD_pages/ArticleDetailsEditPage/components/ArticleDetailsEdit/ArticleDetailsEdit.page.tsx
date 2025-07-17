@@ -10,7 +10,7 @@ import { useSelector } from "react-redux"
 import { useParams } from "react-router"
 import { Navigate } from "react-router-dom"
 import { RoutePaths } from "@config/router/constants/routePath.constant"
-import { getRouteArticleDetailsEdit } from "@config/router"
+import { getRouteArticleDetails } from "@config/router"
 
 type ArticleDetailsEditPageProps = {
 	className?: string
@@ -33,9 +33,7 @@ const ArticleDetailsEditPage = memo<ArticleDetailsEditPageProps>(props => {
 			{id || testId ?
 				<>
 					<h1 className="page-header">{t("article:articleEdit")}</h1>
-					<AppLink to={getRouteArticleDetailsEdit(id)}>
-						{t("article:backToArticle")}
-					</AppLink>
+					<AppLink to={getRouteArticleDetails(id)}>{t("article:backToArticle")}</AppLink>
 				</>
 			:	<h1 className="page-header">{t("article:articleCreate")}</h1>}
 		</Page>
