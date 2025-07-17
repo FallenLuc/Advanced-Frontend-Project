@@ -1,9 +1,9 @@
 import type { DeepPartial } from "@customTypes/global.types"
 import { UserRoles, userDataMock } from "@entities/User"
+import { loginFormActions, loginFormReducer } from "./loginForm.slice"
 import { describe, expect, test } from "@jest/globals"
 import type { loginFormStateMap } from "../storeTypes/loginFormState.map"
 import { loginByUserNameThunk } from "../thunks/loginByUserName/loginByUserName.thunk"
-import { loginFormActions, loginFormReducer } from "./loginForm.slice"
 
 describe("loginFormSliceTest staticReducer", () => {
 	test("Action SetUserName", () => {
