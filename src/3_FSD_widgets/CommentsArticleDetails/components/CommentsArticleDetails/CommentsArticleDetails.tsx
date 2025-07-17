@@ -15,6 +15,7 @@ import { getCommentsArticleDetailsErrorSelector } from "../../store/selectors/ge
 import { getCommentsArticleDetailsIsLoadingSelector } from "../../store/selectors/getCommentsArticleDetailsIsLoading/getCommentsArticleDetailsIsLoading.selector"
 import { commentsArticleDetailsReducer } from "../../store/slices/commentsArticleDetails.slice"
 import { fetchCommentsByArticleIdThunk } from "../../store/thunks/fetchCommentsByArticleId.thunk"
+import { useAuth } from "@entities/User"
 
 type CommentsArticleDetailsProps = {
 	className?: string
@@ -31,6 +32,8 @@ export const CommentsArticleDetails = memo<CommentsArticleDetailsProps>(props =>
 	const { t } = useTranslation()
 	const dispatch = useAppDispatch()
 
+	const { isAuth } = useAuth()
+
 	useAsyncReducer(initialReducer)
 
 	useEffect(() => {
@@ -43,21 +46,25 @@ export const CommentsArticleDetails = memo<CommentsArticleDetailsProps>(props =>
 	const error = useSelector(getCommentsArticleDetailsErrorSelector)
 	const comments = useSelector(getCommentsArticleDetailsDataSelector)
 
-	return (
-		<VStack
-			gap={"gap16"}
-			className={classNamesHelp("", {}, [className])}
-		>
-			<Text
-				title={t("article:listOfComments")}
-				size={TextSize.BIG}
-			/>
-			<AddArticleCommentForm id={articleId} />
-			<CommentList
-				comments={comments}
-				isLoading={isLoading}
-				error={error}
-			/>
-		</VStack>
-	)
+	if (isAuth) {
+		return (
+			<VStack
+				gap={"gap16"}
+				className={classNamesHelp("", {}, [className])}
+			>
+				<Text
+					title={t("article:listOfComments")}
+					size={TextSize.BIG}
+				/>
+				<AddArticleCommentForm id={articleId} />
+				<CommentList
+					comments={comments}
+					isLoading={isLoading}
+					error={error}
+				/>
+			</VStack>
+		)
+	}
+
+	return isAuth
 })
