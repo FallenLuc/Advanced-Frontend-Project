@@ -33,7 +33,7 @@ export const AppLinkWithIcon = memo<AppLinkWithIconProps>(props => {
 				<Icon className={collapsed ? styles.linkIconCollapsed : styles.linkIcon} />
 				{collapsed ?
 					<></>
-				:	t(name)}
+				:	t(name.toLowerCase())}
 			</HStack>
 		</AppLink>
 	)
