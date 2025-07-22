@@ -1,11 +1,11 @@
 import type { PayloadAction } from "@reduxjs/toolkit"
-import { createSlice } from "@reduxjs/toolkit"
 import type { addArticleCommentStateMap } from "../storeTypes/addArticleCommentState.map"
 import { addNewArticleCommentThunk } from "../thunks/addNewArticleCommentThunk/addNewArticleComment.thunk"
+import { buildSlice } from "@helpers/buildSlice/buildSlice.helper"
 
 const initialState: addArticleCommentStateMap = { error: undefined, text: "", isLoading: false }
 
-const addArticleCommentSlice = createSlice({
+const addArticleCommentSlice = buildSlice({
 	name: "addArticleComment",
 	initialState,
 	reducers: {
@@ -36,5 +36,8 @@ const addArticleCommentSlice = createSlice({
 	}
 })
 
-export const { actions: addArticleCommentActions } = addArticleCommentSlice
-export const { reducer: addArticleCommentReducer } = addArticleCommentSlice
+export const {
+	actions: addArticleCommentActions,
+	reducer: addArticleCommentReducer,
+	useActions: useAddArticleCommentActions
+} = addArticleCommentSlice

@@ -9,13 +9,14 @@ import { VStack } from "@ui/Stack"
 import { Text, TextSize } from "@ui/Text"
 import { memo, useEffect } from "react"
 import { useTranslation } from "react-i18next"
-import { useSelector } from "react-redux"
-import { getCommentsArticleDetailsDataSelector } from "../../store/selectors/getCommentsArticleDetailsData/getCommentsArticleDetailsDataSelector"
-import { getCommentsArticleDetailsErrorSelector } from "../../store/selectors/getCommentsArticleDetailsError/getCommentsArticleDetailsError.selector"
-import { getCommentsArticleDetailsIsLoadingSelector } from "../../store/selectors/getCommentsArticleDetailsIsLoading/getCommentsArticleDetailsIsLoading.selector"
 import { commentsArticleDetailsReducer } from "../../store/slices/commentsArticleDetails.slice"
 import { fetchCommentsByArticleIdThunk } from "../../store/thunks/fetchCommentsByArticleId.thunk"
 import { useAuth } from "@entities/User"
+import {
+	useGetCommentsArticleDetailsIsLoadingSelector,
+	useGetCommentsArticleDetailsErrorSelector,
+	useGetCommentsArticleDetailsDataSelector
+} from "../../store/selectors/getCommentsArticleDetailsFields/getCommentsArticleDetailsFields.selector"
 
 type CommentsArticleDetailsProps = {
 	className?: string
@@ -42,9 +43,9 @@ export const CommentsArticleDetails = memo<CommentsArticleDetailsProps>(props =>
 		}
 	}, [articleId, dispatch])
 
-	const isLoading = useSelector(getCommentsArticleDetailsIsLoadingSelector)
-	const error = useSelector(getCommentsArticleDetailsErrorSelector)
-	const comments = useSelector(getCommentsArticleDetailsDataSelector)
+	const isLoading = useGetCommentsArticleDetailsIsLoadingSelector()
+	const error = useGetCommentsArticleDetailsErrorSelector()
+	const comments = useGetCommentsArticleDetailsDataSelector()
 
 	if (isAuth) {
 		return (

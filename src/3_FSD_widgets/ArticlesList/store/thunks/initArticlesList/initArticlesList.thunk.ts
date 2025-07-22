@@ -2,9 +2,9 @@ import type { filterArticlesListStateMap } from "@features/FilterArticlesList"
 import { ArticleSortFieldConstant, filterArticlesListActions } from "@features/FilterArticlesList"
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import type { thunkConfigType } from "@store/storeTypes/thunks.type"
-import { getArticlesListInitedSelector } from "../../selectors/getArticlesListInited/getArticlesListInited.selector"
 import { articlesListActions } from "../../slices/articlesList.slice"
 import { fetchArticlesThunk } from "../fetchArticles/fetchArticles.thunk"
+import { getArticlesListInitedSelector } from "../../selectors/getArticlesListFields/getArticlesListFields.selector"
 
 export const initArticlesListThunk = createAsyncThunk<
 	undefined,
@@ -12,7 +12,7 @@ export const initArticlesListThunk = createAsyncThunk<
 	thunkConfigType<undefined>
 >("articlesList/initArticlesListThunk", (searchParams, thunkAPI) => {
 	const { dispatch, getState } = thunkAPI
-	const inited = getArticlesListInitedSelector(getState())
+	const inited = getArticlesListInitedSelector()(getState())
 
 	if (!inited) {
 		const order = searchParams?.get("_order") as filterArticlesListStateMap["order"]

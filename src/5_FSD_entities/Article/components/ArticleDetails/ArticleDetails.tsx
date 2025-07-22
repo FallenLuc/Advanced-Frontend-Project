@@ -8,11 +8,7 @@ import { Text, TextSize } from "@ui/Text"
 import type { ReactNode } from "react"
 import { memo, useCallback, useEffect } from "react"
 import { useTranslation } from "react-i18next"
-import { useSelector } from "react-redux"
 import { ArticleBlockTypeConstant } from "../../constants/ArticleBlock.constant"
-import { getArticleDataSelector } from "../../store/selectors/getArticleData/getArticleData.selector"
-import { getArticleErrorSelector } from "../../store/selectors/getArticleError/getArticleError.selector"
-import { getArticleIsLoadingSelector } from "../../store/selectors/getArticleIsLoading/getArticleIsLoading.selector"
 import { articleReducer } from "../../store/slices/article.slice"
 import { fetchArticleDataByIdThunk } from "../../store/thunks/fetchArticleDataByIdThunk/fetchArticleDataById.thunk"
 import type { articleBlockDataType } from "../../types/articleBlockData.type"
@@ -24,6 +20,11 @@ import { ArticlesDetailsSkeleton } from "./ui/ArticleDetailsSkeleton/ArticlesDet
 import { TextWithIcon } from "./ui/TextWithIcon/TextWithIcon"
 import { AppImage } from "@ui/AppImage"
 import styles from "./ArticleDetails.module.scss"
+import {
+	useGetArticleIsLoadingSelector,
+	useGetArticleErrorSelector,
+	useGetArticleDataSelector
+} from "../../store/selectors/getArticleFields/getArticleFields.selector"
 
 type ArticleDetailsProps = {
 	id: string | number
@@ -48,9 +49,9 @@ export const ArticleDetails = memo<ArticleDetailsProps>(props => {
 		}
 	}, [dispatch, id])
 
-	const isLoading = useSelector(getArticleIsLoadingSelector)
-	const error = useSelector(getArticleErrorSelector)
-	const data = useSelector(getArticleDataSelector)
+	const isLoading = useGetArticleIsLoadingSelector()
+	const error = useGetArticleErrorSelector()
+	const data = useGetArticleDataSelector()
 
 	const renderBlock = useCallback((block: articleBlockDataType) => {
 		switch (block.type) {

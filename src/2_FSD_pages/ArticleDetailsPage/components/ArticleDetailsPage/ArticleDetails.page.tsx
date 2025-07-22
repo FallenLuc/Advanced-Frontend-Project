@@ -1,5 +1,5 @@
 import type { articleDetailsDataType } from "@entities/Article"
-import { ArticleDetails, getArticleDataSelector } from "@entities/Article"
+import { useGetArticleDataSelector, ArticleDetails } from "@entities/Article"
 import { useAuth } from "@entities/User"
 import { ArticleRating } from "@features/ArticleRating"
 import { ArticlesRecommendation } from "@features/ArticlesRecommendation"
@@ -12,7 +12,6 @@ import { Page } from "@widgets/Page"
 import type { ReactNode } from "react"
 import { memo } from "react"
 import { useTranslation } from "react-i18next"
-import { useSelector } from "react-redux"
 import { useParams } from "react-router"
 import styles from "./ArticleDetailsPage.module.scss"
 import { getRouteArticleDetailsEdit } from "@config/router"
@@ -29,7 +28,7 @@ const ArticleDetailsPage = memo<ArticleDetailsPageProps>(props => {
 	const { t } = useTranslation("article")
 	const { id } = useParams<{ id: articleDetailsDataType["id"] }>()
 	const { authData } = useAuth()
-	const articleData = useSelector(getArticleDataSelector)
+	const articleData = useGetArticleDataSelector()
 
 	let element: ReactNode
 

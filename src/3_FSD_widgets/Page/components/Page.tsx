@@ -6,9 +6,8 @@ import type { PropsWithChildren, UIEvent } from "react"
 import { memo, useCallback } from "react"
 import { useLocation } from "react-router-dom"
 import styles from "./Page.module.scss"
-import { useGetScrollPositionByPathSelector } from "@features/ScrollSave/store/selectors/getScrollPositionByPath/getScrollPositionByPath.selector"
-import { useScrollPositionActions } from "@features/ScrollSave/store/slices/scrollPosition.slice"
 import type { testingProps } from "@customTypes/testing.types"
+import { useGetScrollPositionByPathSelector, useScrollPositionActions } from "@features/ScrollSave"
 
 type PageProps = {
 	className?: string

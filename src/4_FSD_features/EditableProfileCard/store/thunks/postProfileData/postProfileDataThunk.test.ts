@@ -54,7 +54,7 @@ describe("postProfileDataThunkTest", () => {
 
 		const result = await thunk.callThunk("1")
 
-		expect(mockedPut).toBeCalled()
+		expect(mockedPut).toHaveBeenCalled()
 		expect(result.meta.requestStatus).toBe("fulfilled")
 		expect(result.payload).toEqual(profileDataValue)
 	})
@@ -70,7 +70,7 @@ describe("postProfileDataThunkTest", () => {
 
 		const result = await thunk.callThunk("1")
 
-		expect(mockedPut).toBeCalled()
+		expect(mockedPut).toHaveBeenCalled()
 		expect(result.meta.requestStatus).toBe("rejected")
 		expect(result.payload).toEqual([ServerErrors.SERVER_NOT_FOUND])
 	})
@@ -84,7 +84,7 @@ describe("postProfileDataThunkTest", () => {
 
 		const result = await thunk.callThunk("1")
 
-		expect(mockedPut).not.toBeCalled()
+		expect(mockedPut).not.toHaveBeenCalled()
 		expect(result.meta.requestStatus).toBe("rejected")
 		expect(result.payload).toEqual([ValidateErrorsConstant.FIRST_NAME])
 	})

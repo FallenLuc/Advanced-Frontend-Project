@@ -1,10 +1,10 @@
 import { LOCAL_STORAGE_VIEW_ARTICLES_KEY } from "@constants/localStorage.constant"
-import type { articleDetailsDataType } from "@entities/Article"
 import { ArticleItemViews, CountArticleItemOfView } from "@entities/Article"
 import type { PayloadAction } from "@reduxjs/toolkit"
-import { createEntityAdapter, createSlice } from "@reduxjs/toolkit"
 import type { articlesListStateMap } from "../storeTypes/articlesListState.map"
 import { fetchArticlesThunk } from "../thunks/fetchArticles/fetchArticles.thunk"
+import { buildSlice } from "@helpers/buildSlice/buildSlice.helper"
+import { articlesListAdapter } from "../../config/articlesListAdapter.config"
 
 const initialState: articlesListStateMap = {
 	pageNumber: 1,
@@ -18,9 +18,7 @@ const initialState: articlesListStateMap = {
 	entities: {}
 }
 
-export const articlesListAdapter = createEntityAdapter<articleDetailsDataType>()
-
-const articlesListSlice = createSlice({
+const articlesListSlice = buildSlice({
 	name: "articlesList",
 	initialState: articlesListAdapter.getInitialState<articlesListStateMap>(initialState),
 	reducers: {
@@ -89,5 +87,8 @@ const articlesListSlice = createSlice({
 	}
 })
 
-export const { actions: articlesListActions } = articlesListSlice
-export const { reducer: articlesListReducer } = articlesListSlice
+export const {
+	actions: articlesListActions,
+	reducer: articlesListReducer,
+	useActions: useArticleListActions
+} = articlesListSlice

@@ -8,10 +8,12 @@ import {
 import { addQueryParams } from "@helpers/addQueryParams/addQueryParams.helper"
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import type { thunkConfigType } from "@store/storeTypes/thunks.type"
-import { getArticlesListLimitSelector } from "../../selectors/getArticlesListLimit/getArticlesListLimit.selector"
-import { getArticlesListPageNumberSelector } from "../../selectors/getArticlesListPageNumber/getArticlesListPageNumber.selector"
 import type { articlesListStateMap } from "../../storeTypes/articlesListState.map"
 import { RoutePaths } from "@config/router"
+import {
+	getArticlesListLimitSelector,
+	getArticlesListPageNumberSelector
+} from "../../selectors/getArticlesListFields/getArticlesListFields.selector"
 
 export type fetchArticlesThunkProps = {
 	replace?: boolean
@@ -24,12 +26,12 @@ export const fetchArticlesThunk = createAsyncThunk<
 >("articlesList/fetchArticlesThunk", async (props, thunkAPI) => {
 	const { extra, rejectWithValue, getState } = thunkAPI
 
-	const limit = getArticlesListLimitSelector(getState())
-	const pageNumber = getArticlesListPageNumberSelector(getState())
-	const order = getFilterArticlesListOrderSelector(getState())
-	const sortField = getFilterArticlesListSortFieldSelector(getState())
-	const search = getFilterArticlesListSearchSelector(getState())
-	const typeTopic = getFilterArticlesListTypeTopicSelector(getState())
+	const limit = getArticlesListLimitSelector()(getState())
+	const pageNumber = getArticlesListPageNumberSelector()(getState())
+	const order = getFilterArticlesListOrderSelector()(getState())
+	const sortField = getFilterArticlesListSortFieldSelector()(getState())
+	const search = getFilterArticlesListSearchSelector()(getState())
+	const typeTopic = getFilterArticlesListTypeTopicSelector()(getState())
 
 	const params: Record<string, any> = {
 		_sort: sortField,

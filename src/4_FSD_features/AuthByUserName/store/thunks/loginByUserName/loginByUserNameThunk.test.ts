@@ -41,8 +41,8 @@ describe("loginByUserNameThunkTest", () => {
 
 		expect(mockedPost).toHaveBeenCalled()
 		expect(result.meta.requestStatus).toBe("fulfilled")
-		expect(thunk.dispatch).toBeCalledTimes(3)
-		expect(thunk.dispatch).toBeCalledWith(setAuthData(userValue))
+		expect(thunk.dispatch).toHaveBeenCalledTimes(3)
+		expect(thunk.dispatch).toHaveBeenCalledWith(setAuthData(userValue))
 		expect(result.payload).toEqual(userValue)
 	})
 
@@ -51,11 +51,11 @@ describe("loginByUserNameThunkTest", () => {
 
 		const result = await thunk.callThunk({ userName: "adminTest", password: "password" })
 
-		expect(mockedPost).toBeCalled()
+		expect(mockedPost).toHaveBeenCalled()
 		expect(result.meta.requestStatus).toBe("rejected")
-		expect(thunk.dispatch).toBeCalledTimes(2)
-		expect(thunk.dispatch).not.toBeCalledWith(setAuthData(userValue))
-		expect(thunk.dispatch).not.toBeCalledWith(resetForm())
+		expect(thunk.dispatch).toHaveBeenCalledTimes(2)
+		expect(thunk.dispatch).not.toHaveBeenCalledWith(setAuthData(userValue))
+		expect(thunk.dispatch).not.toHaveBeenCalledWith(resetForm())
 		expect(result.payload).toEqual({ noUser: true })
 	})
 
@@ -66,11 +66,11 @@ describe("loginByUserNameThunkTest", () => {
 
 		const result = await thunk.callThunk({ userName: "adminTest", password: "" })
 
-		expect(mockedPost).toBeCalled()
+		expect(mockedPost).toHaveBeenCalled()
 		expect(result.meta.requestStatus).toBe("rejected")
-		expect(thunk.dispatch).toBeCalledTimes(2)
-		expect(thunk.dispatch).not.toBeCalledWith(setAuthData(userValue))
-		expect(thunk.dispatch).not.toBeCalledWith(resetForm())
+		expect(thunk.dispatch).toHaveBeenCalledTimes(2)
+		expect(thunk.dispatch).not.toHaveBeenCalledWith(setAuthData(userValue))
+		expect(thunk.dispatch).not.toHaveBeenCalledWith(resetForm())
 		expect(result.payload).toEqual({ otherError: errorText })
 	})
 })
