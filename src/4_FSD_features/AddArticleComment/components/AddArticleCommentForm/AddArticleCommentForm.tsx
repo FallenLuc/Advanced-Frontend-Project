@@ -1,19 +1,22 @@
 import type { articleDetailsDataType } from "@entities/Article"
 import { AddCommentForm } from "@entities/Comment"
 import { useAuth } from "@entities/User"
-import type { commentBdDataType } from "@features/AddArticleComment/types/commentBdData.type"
 import { useAppDispatch } from "@hooks/useAppDispatch.hook"
 import type { asyncReducersList } from "@hooks/useAsyncReducer.hook"
 import { useAsyncReducer } from "@hooks/useAsyncReducer.hook"
 import { memo, useCallback, useMemo } from "react"
 import {
-	addArticleCommentActions,
-	addArticleCommentReducer
+	addArticleCommentReducer,
+	useAddArticleCommentActions
 } from "../../store/slices/addArticleComment.slice"
 import { addNewArticleCommentThunk } from "../../store/thunks/addNewArticleCommentThunk/addNewArticleComment.thunk"
-import { useGetAddArticleCommentIsLoadingSelector } from "../../store/selectors/getAddArticleCommentIsLoading/getAddArticleCommentIsLoading.selector"
-import { useGetAddArticleCommentTextSelector } from "../../store/selectors/getAddArticleCommentText/getAddArticleCommentTextSelector"
-import { useGetAddArticleCommentErrorSelector } from "../../store/selectors/getAddArticleCommentError/getAddArticleCommentError.selector"
+
+import type { commentBdDataType } from "../../types/commentBdData.type"
+import {
+	useGetAddArticleCommentIsLoadingSelector,
+	useGetAddArticleCommentErrorSelector,
+	useGetAddArticleCommentTextSelector
+} from "../../store/selectors/getAddArticleCommentFields/getAddArticleCommentFields.selector"
 
 type AddArticleCommentFormProps = {
 	className?: string
@@ -31,11 +34,13 @@ export const AddArticleCommentForm = memo<AddArticleCommentFormProps>(props => {
 
 	useAsyncReducer(initReducer)
 
+	const { setText } = useAddArticleCommentActions()
+
 	const onSetTextHandler = useCallback(
 		(text: string) => {
-			dispatch(addArticleCommentActions.setText(text))
+			setText(text)
 		},
-		[dispatch]
+		[setText]
 	)
 
 	const isLoading = useGetAddArticleCommentIsLoadingSelector()

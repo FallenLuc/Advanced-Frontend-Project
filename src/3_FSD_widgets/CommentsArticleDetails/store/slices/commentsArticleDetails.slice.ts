@@ -1,11 +1,9 @@
-import type { commentDataType } from "@entities/Comment"
-import { createEntityAdapter, createSlice } from "@reduxjs/toolkit"
 import type { commentsArticleDetailsMap } from "../storeTypes/commentsArticleDetails.map"
 import { fetchCommentsByArticleIdThunk } from "../thunks/fetchCommentsByArticleId.thunk"
+import { buildSlice } from "@helpers/buildSlice/buildSlice.helper"
+import { commentsArticleDetailsAdapter } from "../../configs/commentsArticleDetailsAdapter.config"
 
-export const commentsArticleDetailsAdapter = createEntityAdapter<commentDataType>()
-
-const commentsArticleDetailsSlice = createSlice({
+const commentsArticleDetailsSlice = buildSlice({
 	name: "commentsArticleDetails",
 	initialState: commentsArticleDetailsAdapter.getInitialState<commentsArticleDetailsMap>({
 		isLoading: false,
@@ -32,5 +30,8 @@ const commentsArticleDetailsSlice = createSlice({
 	}
 })
 
-export const { actions: commentsArticleDetailsActions } = commentsArticleDetailsSlice
-export const { reducer: commentsArticleDetailsReducer } = commentsArticleDetailsSlice
+export const {
+	actions: commentsArticleDetailsActions,
+	reducer: commentsArticleDetailsReducer,
+	useActions: useCommentsArticleDetailsActions
+} = commentsArticleDetailsSlice

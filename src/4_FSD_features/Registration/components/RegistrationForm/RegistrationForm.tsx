@@ -13,7 +13,6 @@ import { useCreateNewUserMutation } from "../../api/createNewUser.rtkq"
 import { Text, TextTheme } from "@ui/Text"
 import { Input } from "@ui/Input"
 import { useAuth } from "@entities/User"
-import { useAppDispatch } from "@hooks/useAppDispatch.hook"
 
 export type RegistrationFormProps = {
 	className?: string
@@ -31,14 +30,13 @@ const RegistrationForm = TypedMemo((props: RegistrationFormProps) => {
 	const { setAuthData } = useAuth()
 
 	const { t } = useTranslation()
-	const dispatch = useAppDispatch()
 
 	const [createUser, { isError, isLoading, data, isSuccess }] = useCreateNewUserMutation()
 
 	useEffect(() => {
 		if (__PROJECT__ !== "storybook") {
 			if (isSuccess) {
-				dispatch(setAuthData(data))
+				setAuthData(data)
 				onSuccess?.()
 			}
 		}

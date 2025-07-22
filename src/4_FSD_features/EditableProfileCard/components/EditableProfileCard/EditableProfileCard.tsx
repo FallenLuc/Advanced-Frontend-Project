@@ -3,23 +3,24 @@ import { CurrencySelect } from "@entities/Currency"
 import type { profileDataType } from "@entities/Profile"
 import { fetchProfileDataThunk, ProfileCard } from "@entities/Profile"
 import { useAuth } from "@entities/User"
-import { useAppDispatch } from "@hooks/useAppDispatch.hook"
 import type { asyncReducersList } from "@hooks/useAsyncReducer.hook"
 import { useAsyncReducer } from "@hooks/useAsyncReducer.hook"
 import { memo, useCallback, useEffect, useMemo } from "react"
-import { useSelector } from "react-redux"
-import { getEditableProfileCardErrorSelector } from "../../store/selectors/getEditableProfileCardError/getEditableProfileCardError.selector"
-import { getEditableProfileCardFormDataSelector } from "../../store/selectors/getEditableProfileCardFormData/getEditableProfileCardFormData.selector"
-import { getEditableProfileCardIsLoadingSelector } from "../../store/selectors/getEditableProfileCardIsLoading/getEditableProfileCardIsLoading.selector"
-import { getEditableProfileCardReadOnlySelector } from "../../store/selectors/getEditableProfileCardReadOnly/geEditableProfileCardReadOnly.selector"
 import {
-	editableProfileActions,
-	editableProfileCardReducer
+	editableProfileCardReducer,
+	useEditableProfileCardActions
 } from "../../store/slices/editableProfileCard.slice"
 import { CancelButton } from "../CancelButton/CancelButton"
 import { EditButton } from "../EditButton/EditButton"
 import { ReFetchButton } from "../ReFetchButton/ReFetchButton"
 import { SaveButton } from "../SaveButton/SaveButton"
+import {
+	useGetEditableProfileCardFormDataSelector,
+	useGetEditableProfileCardIsLoadingSelector,
+	useGetEditableProfileCardErrorSelector,
+	useGetEditableProfileCardReadOnlySelector
+} from "../../store/selectors/getEditableProfileCardFields/getEditableProfileCardFields.selector"
+import { useAppDispatch } from "@hooks/useAppDispatch.hook"
 
 type EditableProfileCardProps = {
 	className?: string
@@ -37,74 +38,74 @@ export const EditableProfileCard = memo<EditableProfileCardProps>(props => {
 
 	const { authData } = useAuth()
 
-	const formData = useSelector(getEditableProfileCardFormDataSelector)
-	const isLoading = useSelector(getEditableProfileCardIsLoadingSelector)
-	const errors = useSelector(getEditableProfileCardErrorSelector)
-	const readOnly = useSelector(getEditableProfileCardReadOnlySelector)
-
 	const dispatch = useAppDispatch()
+
+	const formData = useGetEditableProfileCardFormDataSelector()
+	const isLoading = useGetEditableProfileCardIsLoadingSelector()
+	const errors = useGetEditableProfileCardErrorSelector()
+	const readOnly = useGetEditableProfileCardReadOnlySelector()
 
 	useEffect(() => {
 		dispatch(fetchProfileDataThunk(id))
 	}, [dispatch, id])
 
-	const { updateForm } = editableProfileActions
+	const { updateForm } = useEditableProfileCardActions()
 
 	const onChangeUserNameHandler = useCallback(
 		(value: profileDataType["userName"]) => {
-			dispatch(updateForm({ userName: value }))
+			updateForm({ userName: value })
 		},
-		[dispatch, updateForm]
+		[updateForm]
 	)
 
 	const onChangeAvatarHandler = useCallback(
 		(value: profileDataType["avatar"]) => {
-			dispatch(updateForm({ avatar: value }))
+			updateForm({ avatar: value })
 		},
-		[dispatch, updateForm]
+		[updateForm]
 	)
 
 	const onChangeFirstNameHandler = useCallback(
 		(value: profileDataType["firstName"]) => {
-			dispatch(updateForm({ firstName: value }))
+			updateForm({ firstName: value })
 		},
-		[dispatch, updateForm]
+		[updateForm]
 	)
 
 	const onChangeLastNameHandler = useCallback(
 		(value: profileDataType["lastName"]) => {
-			dispatch(updateForm({ lastName: value }))
+			updateForm({ lastName: value })
 		},
-		[dispatch, updateForm]
+		[updateForm]
 	)
 
 	const onChangeAgeHandler = useCallback(
 		(value: string | number) => {
 			if (!/\D/.test(value as string)) {
-				dispatch(updateForm({ age: Number(value) }))
+				updateForm({ age: Number(value) })
 			}
 		},
-		[dispatch, updateForm]
+		[updateForm]
 	)
 	const onChangeCityHandler = useCallback(
 		(value: profileDataType["city"]) => {
-			dispatch(updateForm({ city: value }))
+			updateForm({ city: value })
 		},
-		[dispatch, updateForm]
+		[updateForm]
 	)
 
 	const onChangeCurrencyHandler = useCallback(
 		(value: profileDataType["currency"]) => {
-			dispatch(updateForm({ currency: value }))
+			updateForm({ currency: value })
 		},
-		[dispatch, updateForm]
+		[updateForm]
 	)
 
 	const onChangeCountryHandler = useCallback(
 		(value: profileDataType["country"]) => {
-			dispatch(updateForm({ country: value }))
+			updateForm({ country: value })
 		},
-		[dispatch, updateForm]
+		[updateForm]
 	)
 
 	const editButton = useMemo(() => <EditButton />, [])

@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import type { thunkConfigType } from "@store/storeTypes/thunks.type"
-import { getUserAuthDataSelector } from "../../selectors/getUserAuthData/getUserAuthData.selector"
 import { saveUserSettingsRtkq } from "../../../api/user.rtkq"
 import type { userSettingsData } from "../../../types/userSettingsData.type"
+import { getUserAuthDataSelector } from "../../selectors/getUserFields/getUserFields.selector"
 
 export const saveUserSettingsThunk = createAsyncThunk<
 	userSettingsData,
@@ -11,7 +11,7 @@ export const saveUserSettingsThunk = createAsyncThunk<
 >("user/saveUserSettings", async (settings, thunkAPI) => {
 	const { dispatch, rejectWithValue, getState } = thunkAPI
 	try {
-		const authData = getUserAuthDataSelector(getState())
+		const authData = getUserAuthDataSelector()(getState())
 
 		if (!authData) {
 			return rejectWithValue(undefined)

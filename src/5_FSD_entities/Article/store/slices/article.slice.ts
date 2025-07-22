@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit"
 import type { articleDetailsStateMap } from "../storeTypes/articleDetailsState.map"
 import { fetchArticleDataByIdThunk } from "../thunks/fetchArticleDataByIdThunk/fetchArticleDataById.thunk"
+import { buildSlice } from "@helpers/buildSlice/buildSlice.helper"
 
 const initialState: articleDetailsStateMap = {
 	isLoading: false,
@@ -8,7 +8,7 @@ const initialState: articleDetailsStateMap = {
 	error: ""
 }
 
-const articleSlice = createSlice({
+const articleSlice = buildSlice({
 	name: "article",
 	initialState,
 	reducers: {},
@@ -30,5 +30,8 @@ const articleSlice = createSlice({
 	}
 })
 
-export const { actions: articleActions } = articleSlice
-export const { reducer: articleReducer } = articleSlice
+export const {
+	actions: articleActions,
+	reducer: articleReducer,
+	useActions: useArticleActions
+} = articleSlice

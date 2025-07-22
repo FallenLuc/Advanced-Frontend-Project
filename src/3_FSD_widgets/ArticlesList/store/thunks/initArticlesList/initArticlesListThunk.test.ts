@@ -30,16 +30,16 @@ describe("fetchProfileDataThunkTest", () => {
 
 		await thunk.callThunk(undefined)
 
-		expect(thunk.dispatch).toBeCalled()
-		expect(thunk.dispatch).toBeCalledTimes(8)
+		expect(thunk.dispatch).toHaveBeenCalled()
+		expect(thunk.dispatch).toHaveBeenCalledTimes(8)
 		expect(thunk.getState()).toEqual({
 			articlesListStateMap: {
 				_inited: false,
 				pageNumber: 1
 			}
 		})
-		expect(thunk.dispatch).toBeCalledWith(articlesListActions.initState())
-		expect(thunk.dispatch).toBeCalledWith(fetchArticlesThunk({}))
+		expect(thunk.dispatch).toHaveBeenCalledWith(articlesListActions.initState())
+		expect(thunk.dispatch).toHaveBeenCalledWith(fetchArticlesThunk({}) as any)
 	})
 
 	test("after inited", async () => {
@@ -53,15 +53,15 @@ describe("fetchProfileDataThunkTest", () => {
 		thunk = new AsyncThunkMock(initArticlesListThunk, state)
 		await thunk.callThunk(undefined)
 
-		expect(thunk.dispatch).toBeCalled()
-		expect(thunk.dispatch).toBeCalledTimes(2)
+		expect(thunk.dispatch).toHaveBeenCalled()
+		expect(thunk.dispatch).toHaveBeenCalledTimes(2)
 		expect(thunk.getState()).toEqual({
 			articlesListStateMap: {
 				_inited: true,
 				pageNumber: 1
 			}
 		})
-		expect(thunk.dispatch).not.toBeCalledWith(articlesListActions.initState())
-		expect(thunk.dispatch).not.toBeCalledWith(fetchArticlesThunk({}))
+		expect(thunk.dispatch).not.toHaveBeenCalledWith(articlesListActions.initState())
+		expect(thunk.dispatch).not.toHaveBeenCalledWith(fetchArticlesThunk({}) as any)
 	})
 })

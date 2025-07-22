@@ -1,7 +1,7 @@
 import type { PayloadAction } from "@reduxjs/toolkit"
-import { createSlice } from "@reduxjs/toolkit"
 import type { loginFormStateMap } from "../storeTypes/loginFormState.map"
 import { loginByUserNameThunk } from "../thunks/loginByUserName/loginByUserName.thunk"
+import { buildSlice } from "@helpers/buildSlice/buildSlice.helper"
 
 const initialState: loginFormStateMap = {
 	data: {
@@ -11,7 +11,7 @@ const initialState: loginFormStateMap = {
 	isLoading: false
 }
 
-const loginFormSlice = createSlice({
+const loginFormSlice = buildSlice({
 	name: "loginForm",
 	initialState,
 	reducers: {
@@ -50,5 +50,8 @@ const loginFormSlice = createSlice({
 	}
 })
 
-export const { actions: loginFormActions } = loginFormSlice
-export const { reducer: loginFormReducer } = loginFormSlice
+export const {
+	actions: loginFormActions,
+	reducer: loginFormReducer,
+	useActions: useLoginFormActions
+} = loginFormSlice
