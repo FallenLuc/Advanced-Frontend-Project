@@ -3,13 +3,12 @@ import { useAppDispatch } from "@hooks/useAppDispatch.hook"
 import {
 	ArticlesList,
 	fetchNextArticlesPageThunk,
-	getArticlesListIsLoadingSelector
+	useGetArticlesListIsLoadingSelector,
+	useGetArticlesListErrorSelector
 } from "@widgets/ArticlesList"
-import { getArticlesListErrorSelector } from "@widgets/ArticlesList/store/selectors/getArticlesListError/getArticlesListError.selector"
 import { Page } from "@widgets/Page"
 import { memo, useCallback } from "react"
 import { useTranslation } from "react-i18next"
-import { useSelector } from "react-redux"
 import styles from "./ArticlesPage.module.scss"
 
 type ArticlesPageProps = {
@@ -22,8 +21,8 @@ const ArticlesPage = memo<ArticlesPageProps>(props => {
 
 	const dispatch = useAppDispatch()
 
-	const articlesIsLoading = useSelector(getArticlesListIsLoadingSelector)
-	const articlesError = useSelector(getArticlesListErrorSelector)
+	const articlesIsLoading = useGetArticlesListIsLoadingSelector()
+	const articlesError = useGetArticlesListErrorSelector()
 
 	const onScrollEndHandler = useCallback(() => {
 		if (!articlesIsLoading && !articlesError && __PROJECT__ !== "storybook") {

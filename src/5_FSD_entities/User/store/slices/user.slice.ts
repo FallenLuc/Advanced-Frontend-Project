@@ -1,11 +1,11 @@
 import { USER_TOKEN } from "@constants/localStorage.constant"
 import type { PayloadAction } from "@reduxjs/toolkit"
-import { createSlice } from "@reduxjs/toolkit"
 import type { userDataType } from "../../types/userData.type"
 import type { userStateMap } from "../storeTypes/userState.map"
 import { setFeatureFlags } from "@config/featureFlags"
 import { fetchUserDataThunk } from "../thunks/fetchUserData/fetchUserData.thunk"
 import { saveUserSettingsThunk } from "../thunks/saveUserSettings/saveUserSettings.thunk"
+import { buildSlice } from "@helpers/buildSlice/buildSlice.helper"
 
 const initialState: userStateMap = {
 	error: undefined,
@@ -13,7 +13,7 @@ const initialState: userStateMap = {
 	_initAuthData: false
 }
 
-const userSlice = createSlice({
+const userSlice = buildSlice({
 	name: "user",
 	initialState,
 	reducers: {
@@ -56,5 +56,4 @@ const userSlice = createSlice({
 	}
 })
 
-export const { actions: userActions } = userSlice
-export const { reducer: userReducer } = userSlice
+export const { actions: userActions, reducer: userReducer, useActions: useUserActions } = userSlice

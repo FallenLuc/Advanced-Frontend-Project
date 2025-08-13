@@ -19,9 +19,9 @@ export const Modal = memo<ModalProps>(props => {
 
 	const modalProps = useMemo(() => ({ isOpen, onClose }), [isOpen, onClose])
 
-	const { isMounted, onCloseHandler } = useModal(modalProps)
+	const { onCloseHandler } = useModal(modalProps)
 
-	if (lazy && !isMounted) {
+	if (lazy && !isOpen) {
 		return null
 	}
 

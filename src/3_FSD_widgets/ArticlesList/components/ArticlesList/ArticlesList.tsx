@@ -2,7 +2,7 @@ import type { ArticleItemViews } from "@entities/Article"
 import { ArticleItemList } from "@entities/Article"
 import {
 	ChangeViewArticlesList,
-	getArticlesListViewSelector
+	useGetArticlesListViewSelector
 } from "@features/ChangeViewArticlesList"
 import { FilterArticlesList } from "@features/FilterArticlesList"
 import { classNamesHelp } from "@helpers/classNamesHelp/classNamesHelp"
@@ -12,15 +12,16 @@ import { useAsyncReducer } from "@hooks/useAsyncReducer.hook"
 
 import { useInitialEffect } from "@hooks/useInitialEffect.hook"
 import { memo, useCallback } from "react"
-import { useSelector } from "react-redux"
 import { useSearchParams } from "react-router-dom"
-import { getArticlesListDataSelector } from "../../store/selectors/getArticlesListData/getArticlesListData.selector"
-import { getArticlesListErrorSelector } from "../../store/selectors/getArticlesListError/getArticlesListError.selector"
-import { getArticlesListIsLoadingSelector } from "../../store/selectors/getArticlesListIsLoading/getArticlesListIsLoading.selector"
-import { articlesListActions, articlesListReducer } from "../../store/slices/articlesList.slice"
+import { articlesListReducer, useArticleListActions } from "../../store/slices/articlesList.slice"
 import { fetchArticlesThunk } from "../../store/thunks/fetchArticles/fetchArticles.thunk"
 import { initArticlesListThunk } from "../../store/thunks/initArticlesList/initArticlesList.thunk"
 import styles from "./ArticlesList.module.scss"
+import {
+	useGetArticlesListDataSelector,
+	useGetArticlesListIsLoadingSelector,
+	useGetArticlesListErrorSelector
+} from "../../store/selectors/getArticlesListFields/getArticlesListFields.selector"
 
 type ArticlesList = {
 	className?: string
@@ -36,7 +37,7 @@ export const ArticlesList = memo<ArticlesList>(props => {
 	useAsyncReducer(initialReducer, false)
 	const dispatch = useAppDispatch()
 
-	const { setView, initState } = articlesListActions
+	const { setView, initState } = useArticleListActions()
 
 	const [searchParams] = useSearchParams()
 
@@ -46,10 +47,10 @@ export const ArticlesList = memo<ArticlesList>(props => {
 		}, [dispatch, searchParams])
 	)
 
-	const data = useSelector(getArticlesListDataSelector)
-	const isLoading = useSelector(getArticlesListIsLoadingSelector)
-	const error = useSelector(getArticlesListErrorSelector)
-	const view = useSelector(getArticlesListViewSelector)
+	const data = useGetArticlesListDataSelector()
+	const isLoading = useGetArticlesListIsLoadingSelector()
+	const error = useGetArticlesListErrorSelector()
+	const view = useGetArticlesListViewSelector()
 
 	const onFetchFilterArticles = useCallback(() => {
 		dispatch(initState())
@@ -60,9 +61,9 @@ export const ArticlesList = memo<ArticlesList>(props => {
 
 	const onChangeViewHandler = useCallback(
 		(newView: ArticleItemViews) => {
-			dispatch(setView(newView))
+			setView(newView)
 		},
-		[dispatch, setView]
+		[setView]
 	)
 
 	return (

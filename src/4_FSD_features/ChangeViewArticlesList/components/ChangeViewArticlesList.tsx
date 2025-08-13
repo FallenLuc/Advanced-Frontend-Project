@@ -3,8 +3,7 @@ import { ArticleItemViews } from "@entities/Article"
 import { classNamesHelp } from "@helpers/classNamesHelp/classNamesHelp"
 import { Button, ButtonTheme } from "@ui/Button"
 import { memo } from "react"
-import { useSelector } from "react-redux"
-import { getArticlesListViewSelector } from "../store/selectors/getArticlesListView/getArticlesListView.selector"
+import { useGetArticlesListViewSelector } from "../store/selectors/getArticlesListView/getArticlesListView.selector"
 import styles from "./ChangeViewArticlesList.module.scss"
 
 type ChangeViewArticlesListProps = {
@@ -14,7 +13,7 @@ type ChangeViewArticlesListProps = {
 export const ChangeViewArticlesList = memo<ChangeViewArticlesListProps>(props => {
 	const { className, onChangeView } = props
 
-	const view = useSelector(getArticlesListViewSelector)
+	const view = useGetArticlesListViewSelector()
 
 	const onChangeViewHandler = (newView: ArticleItemViews) => () => {
 		onChangeView(newView)

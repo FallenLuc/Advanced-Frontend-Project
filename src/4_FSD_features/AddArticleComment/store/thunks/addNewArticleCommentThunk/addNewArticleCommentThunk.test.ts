@@ -35,7 +35,7 @@ describe("fetchProfileDataThunkTest", () => {
 		const result = await thunk.callThunk(DataValue as commentBdDataType)
 
 		expect(mockedRequest).toHaveBeenCalled()
-		expect(thunk.dispatch).toBeCalledTimes(3)
+		expect(thunk.dispatch).toHaveBeenCalledTimes(3)
 		expect(result.meta.requestStatus).toBe("fulfilled")
 		expect(result.payload).toEqual(DataValue)
 	})
@@ -51,7 +51,7 @@ describe("fetchProfileDataThunkTest", () => {
 		const result = await thunk.callThunk(DataValue as commentBdDataType)
 
 		expect(mockedRequest).toHaveBeenCalled()
-		expect(thunk.dispatch).toBeCalledTimes(2)
+		expect(thunk.dispatch).toHaveBeenCalledTimes(2)
 		expect(result.meta.requestStatus).toBe("rejected")
 		expect(result.payload).toBe("error with post comment")
 	})

@@ -15,6 +15,7 @@ type RatingCardProps = {
 	isFeedback: boolean
 	titleFeedback?: string
 	isSendLoading?: boolean
+	isLockedDefault?: boolean
 	onAccept?: (rating: number, feedback?: string) => void
 	onCancel?: () => void
 }
@@ -27,6 +28,7 @@ export const RatingCard = memo<RatingCardProps>(props => {
 		onCancel,
 		isFeedback,
 		titleFeedback,
+		isLockedDefault = false,
 		isSendLoading = false
 	} = props
 
@@ -77,7 +79,7 @@ export const RatingCard = memo<RatingCardProps>(props => {
 				/>
 				<RatingStars
 					className={styles.ratingStars}
-					isLocked={isLocked}
+					isLocked={isLocked || isLockedDefault}
 					rating={selectedRating}
 					onChangeRating={onSelectHandler}
 				/>

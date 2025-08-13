@@ -3,7 +3,7 @@ import { ServerErrors } from "@entities/Profile"
 import { validateErrors } from "@entities/Profile/lib/helpers/validateErrors/validateErrors"
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import type { thunkConfigType } from "@store/storeTypes/thunks.type"
-import { getEditableProfileCardFormDataSelector } from "../../selectors/getEditableProfileCardFormData/getEditableProfileCardFormData.selector"
+import { getEditableProfileCardFormDataSelector } from "../../selectors/getEditableProfileCardFields/getEditableProfileCardFields.selector"
 
 export const postProfileDataThunk = createAsyncThunk<
 	profileDataType,
@@ -12,7 +12,7 @@ export const postProfileDataThunk = createAsyncThunk<
 >("profile/postProfileData", async (id, thunkAPI) => {
 	const { extra, rejectWithValue, getState } = thunkAPI
 	try {
-		const formData = getEditableProfileCardFormDataSelector(getState())
+		const formData = getEditableProfileCardFormDataSelector()(getState())
 
 		const errors = validateErrors(formData)
 

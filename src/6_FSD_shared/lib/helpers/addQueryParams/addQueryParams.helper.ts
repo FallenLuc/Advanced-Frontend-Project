@@ -15,11 +15,15 @@ export function createQueryParams<T extends string | number>(params?: paramsType
 }
 
 /**
- * Обновляет адрес страницы, добавляя поля переданного объекта в качестве url параметров.
- * @param {paramsType<T>} params - объект поля которого станут url парамeтрами
- * @param {string} link - базовая ссылка
+ * Adds query parameters to the current URL and updates the browser's history state.
+ *
+ * @param {paramsType<T>} [params] An optional object containing key-value pairs to be added as query parameters.
+ * @param {string} [link] An optional base URL or path to which the query parameters should be appended.
+ * @return {void} This method does not return a value.
  */
-
-export function addQueryParams<T extends string | number>(params?: paramsType<T>, link?: string) {
+export function addQueryParams<T extends string | number>(
+	params?: paramsType<T>,
+	link?: string
+): void {
 	window.history.pushState({}, "", `#${link || "/"}${createQueryParams(params)}`)
 }

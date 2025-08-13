@@ -3,13 +3,16 @@ import { StoreDecorator } from "@decorators/storybook/Store.decorator"
 import { ratingDataMock } from "@entities/Rating/lib/mocks/ratingData.mock"
 import { type Meta, type StoryObj } from "@storybook/react"
 import ArticleRating from "./ArticleRating"
+import type { ComponentPropsWithAuth } from "@customTypes/global.types"
 
-const meta: Meta<typeof ArticleRating> = {
+type ArticleRatingCustomProps = ComponentPropsWithAuth<typeof ArticleRating>
+
+const meta: Meta<ArticleRatingCustomProps> = {
 	title: "features/ArticleRating",
 	component: ArticleRating,
 	parameters: {
 		controls: {
-			exclude: ["articleId"]
+			exclude: ["articleId", "auth"]
 		}
 	},
 	decorators: [StoreDecorator({}), CenterDecorator]
@@ -17,7 +20,7 @@ const meta: Meta<typeof ArticleRating> = {
 
 export default meta
 
-type TypeStory = StoryObj<typeof ArticleRating>
+type TypeStory = StoryObj<ArticleRatingCustomProps>
 
 export const Default: TypeStory = {
 	parameters: {
@@ -32,7 +35,8 @@ export const Default: TypeStory = {
 		]
 	},
 	args: {
-		articleId: "1"
+		articleId: "1",
+		auth: true
 	}
 }
 
@@ -49,7 +53,8 @@ export const Loading: TypeStory = {
 		]
 	},
 	args: {
-		articleId: "1"
+		articleId: "1",
+		auth: true
 	}
 }
 
@@ -66,7 +71,8 @@ export const Error: TypeStory = {
 		]
 	},
 	args: {
-		articleId: "1"
+		articleId: "1",
+		auth: true
 	}
 }
 
@@ -90,6 +96,7 @@ export const WithOutRating: TypeStory = {
 		]
 	},
 	args: {
+		auth: true,
 		articleId: "1"
 	}
 }
@@ -114,6 +121,7 @@ export const WithOutRatingError: TypeStory = {
 		]
 	},
 	args: {
+		auth: true,
 		articleId: "1"
 	}
 }

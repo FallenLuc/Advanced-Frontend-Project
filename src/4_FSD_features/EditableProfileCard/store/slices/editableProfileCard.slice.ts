@@ -1,8 +1,8 @@
 import { fetchProfileDataThunk, mappingErrors } from "@entities/Profile"
 import type { PayloadAction } from "@reduxjs/toolkit"
-import { createSlice } from "@reduxjs/toolkit"
 import type { editableProfileStateMap } from "../storeTypes/editableProfileState.map"
 import { postProfileDataThunk } from "../thunks/postProfileData/postProfileData.thunk"
+import { buildSlice } from "@helpers/buildSlice/buildSlice.helper"
 
 const initialState: editableProfileStateMap = {
 	isLoading: false,
@@ -12,7 +12,7 @@ const initialState: editableProfileStateMap = {
 	errors: undefined
 }
 
-const editableProfileCardSlice = createSlice({
+const editableProfileCardSlice = buildSlice({
 	name: "editableProfileSlice",
 	initialState,
 	reducers: {
@@ -80,5 +80,8 @@ const editableProfileCardSlice = createSlice({
 	}
 })
 
-export const { actions: editableProfileActions } = editableProfileCardSlice
-export const { reducer: editableProfileCardReducer } = editableProfileCardSlice
+export const {
+	actions: editableProfileActions,
+	reducer: editableProfileCardReducer,
+	useActions: useEditableProfileCardActions
+} = editableProfileCardSlice

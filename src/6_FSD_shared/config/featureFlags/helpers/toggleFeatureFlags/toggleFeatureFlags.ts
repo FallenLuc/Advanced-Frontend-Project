@@ -1,7 +1,7 @@
 import { type featureFlagsKeysType } from "../../types/featureFlags.type"
 import { getFeatureFlag } from "../../config/featureFlags.config"
 
-type toggleFeatureFlagsParams<T> = {
+export type toggleFeatureFlagsParams<T> = {
 	name: featureFlagsKeysType
 	on: () => T
 	off: () => T
@@ -14,5 +14,3 @@ export function toggleFeatureFlags<T>(params: toggleFeatureFlagsParams<T>) {
 
 	return params.off()
 }
-
-// ToDo Тесты

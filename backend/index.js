@@ -3,6 +3,7 @@ const jsonServer = require("json-server")
 const path = require("path")
 const https = require("https")
 const http = require("http")
+const uid = require("uid")
 
 const options = {
 	key: fs.readFileSync(path.resolve(__dirname, "key.pem")),
@@ -45,6 +46,56 @@ server.post("/login", (req, res) => {
 		}
 
 		return res.status(403).json({ message: "User not found" })
+	} catch (e) {
+		console.log(e)
+		return res.status(500).json({ message: e.message })
+	}
+})
+
+server.post("/signUp", (req, res) => {
+	try {
+		const { userName, password } = req.body
+
+		const db = router.db
+
+		const existingUser = db.get("users").find({ userName, password }).value()
+
+		if (existingUser) {
+			return res.status(403).json({ message: "User already registered" })
+		}
+
+		const newUser = {
+			id: uid.uid(8),
+			userName: userName,
+			password: password,
+			roles: ["USER"],
+			features: {
+				isFeatureRating: true,
+				isFeatureComments: true
+			},
+			settings: {
+				theme: "app-dark-theme"
+			},
+			avatar: ""
+		}
+
+		db.get("users").push(newUser).write()
+
+		db.get("profile")
+			.push({
+				firstName: newUser.userName,
+				lastName: "",
+				age: 0,
+				currency: "RUB",
+				country: "Russia",
+				city: "",
+				userName: newUser.userName,
+				avatar: "",
+				id: newUser.id
+			})
+			.write()
+
+		return res.json(newUser)
 	} catch (e) {
 		console.log(e)
 		return res.status(500).json({ message: e.message })

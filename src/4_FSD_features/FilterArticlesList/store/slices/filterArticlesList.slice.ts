@@ -1,7 +1,7 @@
 import type { PayloadAction } from "@reduxjs/toolkit"
-import { createSlice } from "@reduxjs/toolkit"
 import { ArticleSortFieldConstant } from "../../constants/ArticleSortField.constant"
 import type { filterArticlesListStateMap } from "../storeTypes/filterArticlesListState.map"
+import { buildSlice } from "@helpers/buildSlice/buildSlice.helper"
 
 const initialState: filterArticlesListStateMap = {
 	order: "ASC",
@@ -10,7 +10,7 @@ const initialState: filterArticlesListStateMap = {
 	typeTopic: "ALL"
 }
 
-const filterArticlesListSlice = createSlice({
+const filterArticlesListSlice = buildSlice({
 	name: "filterArticlesList",
 	initialState,
 	reducers: {
@@ -29,5 +29,8 @@ const filterArticlesListSlice = createSlice({
 	}
 })
 
-export const { actions: filterArticlesListActions } = filterArticlesListSlice
-export const { reducer: filterArticlesListReducer } = filterArticlesListSlice
+export const {
+	actions: filterArticlesListActions,
+	reducer: filterArticlesListReducer,
+	useActions: useFilterArticlesListActions
+} = filterArticlesListSlice

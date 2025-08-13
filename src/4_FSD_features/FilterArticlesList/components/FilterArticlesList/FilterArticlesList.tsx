@@ -1,7 +1,6 @@
 import type { sortOrder } from "@customTypes/productGlobal.types"
 import { ArticleTypeConstant } from "@entities/Article/constants/Article.constant"
 import { classNamesHelp } from "@helpers/classNamesHelp/classNamesHelp"
-import { useAppDispatch } from "@hooks/useAppDispatch.hook"
 import type { asyncReducersList } from "@hooks/useAsyncReducer.hook"
 import { useAsyncReducer } from "@hooks/useAsyncReducer.hook"
 import { useDebounce } from "@hooks/useDebounce.hook"
@@ -13,17 +12,18 @@ import type { TabsItemType } from "@ui/Tabs"
 import { Tabs } from "@ui/Tabs"
 import { memo, useCallback, useMemo } from "react"
 import { useTranslation } from "react-i18next"
-import { useSelector } from "react-redux"
 import { ArticleSortFieldConstant } from "../../constants/ArticleSortField.constant"
-import { getFilterArticlesListOrderSelector } from "../../store/selectors/getFilterArticlesListOrder/getFilterArticlesListOrder.selector"
-import { getFilterArticlesListSearchSelector } from "../../store/selectors/getFilterArticlesListSearch/getFilterArticlesListSearch.selector"
-import { getFilterArticlesListSortFieldSelector } from "../../store/selectors/getFilterArticlesListSortField/getFilterArticlesListSortField.selector"
-import { getFilterArticlesListTypeTopicSelector } from "../../store/selectors/getFilterArticlesListTypeTopic/getFilterArticlesListTypeTopic.selector"
 import {
-	filterArticlesListActions,
-	filterArticlesListReducer
+	filterArticlesListReducer,
+	useFilterArticlesListActions
 } from "../../store/slices/filterArticlesList.slice"
 import styles from "./FilterArticlesList.module.scss"
+import {
+	useGetFilterArticlesListOrderSelector,
+	useGetFilterArticlesListSortFieldSelector,
+	useGetFilterArticlesListSearchSelector,
+	useGetFilterArticlesListTypeTopicSelector
+} from "../../store/selectors/getFilterArticlesListFields/getFilterArticlesListFields.selector"
 
 type FilterArticlesListProps = {
 	className?: string
@@ -41,13 +41,12 @@ export const FilterArticlesList = memo<FilterArticlesListProps>(props => {
 
 	useAsyncReducer(initReducer, false)
 
-	const dispatch = useAppDispatch()
-	const { setOrder, setSortField, setSearch, setType } = filterArticlesListActions
+	const { setOrder, setSortField, setSearch, setType } = useFilterArticlesListActions()
 
-	const order = useSelector(getFilterArticlesListOrderSelector)
-	const sortField = useSelector(getFilterArticlesListSortFieldSelector)
-	const search = useSelector(getFilterArticlesListSearchSelector)
-	const typeTopic = useSelector(getFilterArticlesListTypeTopicSelector)
+	const order = useGetFilterArticlesListOrderSelector()
+	const sortField = useGetFilterArticlesListSortFieldSelector()
+	const search = useGetFilterArticlesListSearchSelector()
+	const typeTopic = useGetFilterArticlesListTypeTopicSelector()
 
 	const optionsOrder = useMemo<OptionType<sortOrder>[]>(
 		() => [
@@ -68,18 +67,18 @@ export const FilterArticlesList = memo<FilterArticlesListProps>(props => {
 
 	const onChangeOrderHandler = useCallback(
 		(value: sortOrder) => {
-			dispatch(setOrder(value))
+			setOrder(value)
 			callback()
 		},
-		[callback, dispatch, setOrder]
+		[callback, setOrder]
 	)
 
 	const onChangeSortFieldHandler = useCallback(
 		(value: ArticleSortFieldConstant) => {
-			dispatch(setSortField(value))
+			setSortField(value)
 			callback()
 		},
-		[callback, dispatch, setSortField]
+		[callback, setSortField]
 	)
 
 	const debounceCallback = useDebounce(
@@ -89,11 +88,11 @@ export const FilterArticlesList = memo<FilterArticlesListProps>(props => {
 
 	const onChangeSearch = useCallback(
 		(value: string) => {
-			dispatch(setSearch(value))
+			setSearch(value)
 
 			debounceCallback()
 		},
-		[dispatch, setSearch, debounceCallback]
+		[setSearch, debounceCallback]
 	)
 
 	const tabs = useMemo<TabsItemType<ArticleTypeConstant | "ALL">[]>(
@@ -120,10 +119,10 @@ export const FilterArticlesList = memo<FilterArticlesListProps>(props => {
 
 	const onChangeTypeTopic = useCallback(
 		(tab: TabsItemType<ArticleTypeConstant | "ALL">) => {
-			dispatch(setType(tab.value))
+			setType(tab.value)
 			debounceCallback()
 		},
-		[debounceCallback, dispatch, setType]
+		[debounceCallback, setType]
 	)
 
 	return (
