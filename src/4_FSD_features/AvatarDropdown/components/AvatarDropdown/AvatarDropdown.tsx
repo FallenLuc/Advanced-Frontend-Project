@@ -3,7 +3,6 @@ import { Avatar, AvatarSize, AvatarTheme } from "@ui/Avatar"
 import { Dropdown } from "@ui/Dropdown"
 import { memo, useCallback, useMemo } from "react"
 import { useTranslation } from "react-i18next"
-import { useDispatch } from "react-redux"
 import { RoutePaths } from "@config/router/constants/routePath.constant"
 import { getRouteProfile } from "@config/router"
 
@@ -15,14 +14,13 @@ export const AvatarDropdown = memo<AvatarDropdownProps>(props => {
 
 	const { t } = useTranslation()
 
-	const dispatch = useDispatch()
 	const { logOut, authData, isAdmin, isManager } = useAuth()
 
 	const logOutHandler = useCallback(() => {
 		if (__PROJECT__ !== "storybook") {
-			dispatch(logOut())
+			logOut()
 		}
-	}, [dispatch, logOut])
+	}, [logOut])
 
 	const profileAvatar = useMemo(
 		() => (

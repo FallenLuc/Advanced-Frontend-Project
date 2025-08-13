@@ -25,7 +25,7 @@ export const useAsyncReducer = (asyncReducers: asyncReducersList, removeAfterUnm
 
 		return () => {
 			entries.forEach(([key, value]) => {
-				if (removeAfterUnmount) {
+				if (removeAfterUnmount && __PROJECT__ !== "storybook") {
 					storeApp.reducerManager.remove(key as mainStateAsyncKeys, value)
 					dispatch({ type: `@DESTROY ${key}` })
 				}

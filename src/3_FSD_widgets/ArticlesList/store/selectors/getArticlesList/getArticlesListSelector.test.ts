@@ -3,7 +3,7 @@ import { describe, expect, test } from "@jest/globals"
 import type { mainStateMap } from "@store/storeTypes/mainState.map"
 import { getArticlesListSelector } from "./getArticlesList.selector"
 
-describe(getArticlesListSelector, () => {
+describe("getArticlesListSelector", () => {
 	test("get state", () => {
 		const state: DeepPartial<mainStateMap> = {
 			articlesListStateMap: {

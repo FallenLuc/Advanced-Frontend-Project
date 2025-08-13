@@ -1,9 +1,8 @@
 import { classNamesHelp } from "@helpers/classNamesHelp/classNamesHelp"
-import { useAppDispatch } from "@hooks/useAppDispatch.hook"
 import { Button, ButtonTheme } from "@ui/Button"
 import { memo, useCallback } from "react"
 import { useTranslation } from "react-i18next"
-import { editableProfileActions } from "../../store/slices/editableProfileCard.slice"
+import { useEditableProfileCardActions } from "../../store/slices/editableProfileCard.slice"
 import styles from "./CancelButton.module.scss"
 
 type CancelButtonProps = {
@@ -13,12 +12,11 @@ export const CancelButton = memo<CancelButtonProps>(props => {
 	const { classNames } = props
 	const { t } = useTranslation("profile")
 
-	const { resetForm } = editableProfileActions
-	const dispatch = useAppDispatch()
+	const { resetForm } = useEditableProfileCardActions()
 
 	const onResetFormHandler = useCallback(() => {
-		dispatch(resetForm())
-	}, [dispatch, resetForm])
+		resetForm()
+	}, [resetForm])
 
 	return (
 		<Button

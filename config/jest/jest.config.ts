@@ -10,6 +10,7 @@ const config: JestConfigWithTsJest = {
 	testEnvironment: "jsdom",
 	rootDir: "../../",
 	roots: ["<rootDir>"],
+	injectGlobals: true,
 	setupFilesAfterEnv: ["<rootDir>/config/jest/jest.setup.ts"],
 	moduleDirectories: ["node_modules", "<rootDir>"],
 	modulePaths: [compilerOptions.baseUrl],

@@ -11,6 +11,11 @@ import commentsEntities from "./comments.data.json"
 const meta: Meta<ComponentPropsWithAuth<typeof CommentsArticleDetails>> = {
 	title: "widgets/CommentsArticleDetails",
 	component: CommentsArticleDetails,
+	parameters: {
+		controls: {
+			exclude: ["articleId", "auth"]
+		}
+	},
 	decorators: [ContainerDecorator, CenterDecorator]
 }
 

@@ -12,6 +12,7 @@ import { memo, type PropsWithChildren, useCallback, useState } from "react"
 import { useTranslation } from "react-i18next"
 import styles from "./Header.module.scss"
 import { RoutePaths } from "@config/router/constants/routePath.constant"
+import { RegistrationModal } from "@features/Registration"
 
 type HeaderProps = {
 	classNames?: string
@@ -23,9 +24,10 @@ export const Header = memo<HeaderProps>(props => {
 
 	const { t } = useTranslation()
 
-	const [isAuthModal, setIsAuthModal] = useState(false)
-
 	const { authData, isAdmin } = useAuth()
+
+	const [isAuthModal, setIsAuthModal] = useState(false)
+	const [isRegisterModal, setIsRegisterModal] = useState(false)
 
 	const loginModalShow = useCallback(() => {
 		setIsAuthModal(true)
@@ -34,14 +36,34 @@ export const Header = memo<HeaderProps>(props => {
 		setIsAuthModal(false)
 	}, [])
 
+	const registerModalShow = useCallback(() => {
+		setIsRegisterModal(true)
+	}, [])
+	const registerModalClose = useCallback(() => {
+		setIsRegisterModal(false)
+	}, [])
+
 	const loginWidget = (
-		<Button
-			theme={ButtonTheme.CLEAR}
-			inverted
-			onClick={loginModalShow}
+		<HStack
+			widthMax={false}
+			gap={"gap16"}
 		>
-			{t("translation:login")}
-		</Button>
+			<Button
+				theme={ButtonTheme.CLEAR}
+				inverted
+				onClick={registerModalShow}
+			>
+				{t("translation:registration")}
+			</Button>
+
+			<Button
+				theme={ButtonTheme.CLEAR}
+				inverted
+				onClick={loginModalShow}
+			>
+				{t("translation:login")}
+			</Button>
+		</HStack>
 	)
 
 	const btnLogOut = (
@@ -96,6 +118,13 @@ export const Header = memo<HeaderProps>(props => {
 				<LoginModal
 					onClose={loginModalClose}
 					isOpen={isAuthModal}
+					lazy
+				/>
+			</Portal>
+			<Portal>
+				<RegistrationModal
+					onClose={registerModalClose}
+					isOpen={isRegisterModal}
 					lazy
 				/>
 			</Portal>

@@ -20,7 +20,7 @@ const ArticleRating = memo<ArticleRatingProps>(props => {
 
 	const { t } = useTranslation("article")
 
-	const { authData } = useAuth()
+	const { authData, isAuth } = useAuth()
 
 	const getArticleRatingParams = useMemo(
 		() => ({ articleId, userId: authData?.id || "" }),
@@ -72,17 +72,22 @@ const ArticleRating = memo<ArticleRatingProps>(props => {
 
 	const rating = data?.[0]
 
-	return (
-		<RatingCard
-			isFeedback={true}
-			title={t("article:rateThisArticle")}
-			titleFeedback={t("article:howDoYouLikeTheArticle")}
-			className={className}
-			initialRating={rating?.rate}
-			isSendLoading={response.isLoading}
-			onAccept={onAcceptHandler}
-		/>
-	)
+	if (isAuth) {
+		return (
+			<RatingCard
+				isFeedback={true}
+				isLockedDefault={!isAuth}
+				title={t("article:rateThisArticle")}
+				titleFeedback={t("article:howDoYouLikeTheArticle")}
+				className={className}
+				initialRating={rating?.rate}
+				isSendLoading={response.isLoading}
+				onAccept={onAcceptHandler}
+			/>
+		)
+	}
+
+	return null
 })
 
 export default ArticleRating

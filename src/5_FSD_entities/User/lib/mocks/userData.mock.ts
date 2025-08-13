@@ -18,7 +18,9 @@ export const userDataMock: (params: DeepPartial<userDataType>) => userDataType =
 		settings: { theme: THEMES.DARK }
 	}
 
-	setFeatureFlags(userData.features)
+	if (__PROJECT__ !== "frontend") {
+		setFeatureFlags(userData.features)
+	}
 
 	return userData
 }

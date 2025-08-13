@@ -8,15 +8,16 @@ import { Text, TextTheme } from "@ui/Text"
 import type { FormEvent } from "react"
 import { memo, useCallback } from "react"
 import { useTranslation } from "react-i18next"
-import { useSelector } from "react-redux"
-import { getLoginFormErrorSelector } from "../../store/selectors/getLoginFormError/getLoginFormError.selector"
-import { getLoginFormIsLoadingSelector } from "../../store/selectors/getLoginFormIsLoading/getLoginFormIsLoading.selector"
-import { getLoginFormPasswordSelector } from "../../store/selectors/getLoginFormPassword/getLoginFormPassword.selector"
-import { getLoginFormUserNameSelector } from "../../store/selectors/getLoginFormUserName/getLoginFormUserName.selector"
-import { loginFormActions, loginFormReducer } from "../../store/slices/loginForm.slice"
+import { loginFormReducer, useLoginFormActions } from "../../store/slices/loginForm.slice"
 import { loginByUserNameThunk } from "../../store/thunks/loginByUserName/loginByUserName.thunk"
 
 import styles from "./LoginForm.module.scss"
+import {
+	useGetLoginFormUserNameSelector,
+	useGetLoginFormIsLoadingSelector,
+	useGetLoginFormErrorSelector,
+	useGetLoginFormPasswordSelector
+} from "../../store/selectors/getLoginFormFields/getLoginFormFields.selector"
 
 export type LoginFormProps = {
 	classNames?: string
@@ -32,12 +33,12 @@ const LoginForm = memo<LoginFormProps>(props => {
 	const { t } = useTranslation()
 
 	const dispatch = useAppDispatch()
-	const { setUserName, setPassword, resetForm } = loginFormActions
+	const { setUserName, setPassword, resetForm } = useLoginFormActions()
 
-	const userName = useSelector(getLoginFormUserNameSelector)
-	const password = useSelector(getLoginFormPasswordSelector)
-	const isLoading = useSelector(getLoginFormIsLoadingSelector)
-	const error = useSelector(getLoginFormErrorSelector)
+	const userName = useGetLoginFormUserNameSelector()
+	const password = useGetLoginFormPasswordSelector()
+	const isLoading = useGetLoginFormIsLoadingSelector()
+	const error = useGetLoginFormErrorSelector()
 
 	useAsyncReducer(asyncReducers)
 
@@ -46,16 +47,16 @@ const LoginForm = memo<LoginFormProps>(props => {
 
 	const onChangeUserName = useCallback(
 		(value: string) => {
-			dispatch(setUserName(value))
+			setUserName(value)
 		},
-		[dispatch, setUserName]
+		[setUserName]
 	)
 
 	const onChangePassword = useCallback(
 		(value: string) => {
-			dispatch(setPassword(value))
+			setPassword(value)
 		},
-		[dispatch, setPassword]
+		[setPassword]
 	)
 
 	const onLogin = useCallback(
@@ -67,9 +68,8 @@ const LoginForm = memo<LoginFormProps>(props => {
 
 				if (result.meta.requestStatus === "fulfilled") {
 					onSuccess?.()
+					resetForm()
 				}
-
-				dispatch(resetForm())
 			}
 		},
 		[dispatch, onSuccess, password, resetForm, userName]

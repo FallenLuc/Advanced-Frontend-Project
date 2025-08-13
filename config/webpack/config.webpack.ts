@@ -13,6 +13,9 @@ export function configWebpack(options: buildOptionsType): Configuration {
 		entry: paths.entry,
 		devtool: isDev ? "eval-source-map" : undefined,
 		optimization: optimizationWebpack(options),
+		performance: {
+			hints: false
+		},
 		devServer: isDev ? devServerWebpack(options) : undefined,
 		resolve: resolversWebpack(options),
 		output: {

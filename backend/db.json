@@ -56,7 +56,7 @@
 				"isFeatureComments": true
 			},
 			"settings": {
-				"theme": "app-green-theme"
+				"theme": "app-dark-theme"
 			},
 			"avatar": "https://i.pinimg.com/originals/f0/f8/fe/f0f8fe0e76824fd544a9154b995fb01d.jpg"
 		},
@@ -70,37 +70,23 @@
 				"isFeatureComments": true
 			},
 			"settings": {
-				"theme": "app-dark-theme"
+				"theme": "app-green-theme"
 			},
 			"avatar": "https://i.pinimg.com/originals/05/86/f5/0586f507c54a52dc0542a"
 		},
 		{
-			"id": "12",
-			"userName": "Admin Test User",
-			"password": "123",
-			"roles": ["USER", "ADMIN"],
-			"features": {
-				"isFeatureRating": false,
-				"isFeatureComments": false
-			},
-			"settings": {
-				"theme": "app-dark-theme"
-			},
-			"avatar": "https://i.pinimg.com/originals/f0/f8/fe/f0f8fe0e76824fd544a9154b995fb01d.jpg"
-		},
-		{
-			"id": "1212",
-			"userName": "Test User",
+			"id": "bd125bc7",
+			"userName": "Nikita",
 			"password": "123",
 			"roles": ["USER"],
 			"features": {
 				"isFeatureRating": true,
-				"isFeatureComments": false
+				"isFeatureComments": true
 			},
 			"settings": {
 				"theme": "app-dark-theme"
 			},
-			"avatar": "https://i.pinimg.com/originals/f0/f8/fe/f0f8fe0e76824fd544a9154b995fb01d.jpg"
+			"avatar": ""
 		}
 	],
 	"profile": [
@@ -111,7 +97,7 @@
 			"currency": "EUR",
 			"country": "Belarus",
 			"city": "Minsk",
-			"userName": "Lucifer",
+			"userName": "Luc",
 			"avatar": "https://i.pinimg.com/originals/f0/f8/fe/f0f8fe0e76824fd544a9154b995fb01d.jpg",
 			"id": "1"
 		},
@@ -125,6 +111,17 @@
 			"userName": "Alice",
 			"avatar": "https://i.pinimg.com/originals/05/86/f5/0586f507c54a52dc0542a",
 			"id": "2"
+		},
+		{
+			"firstName": "Nikita",
+			"lastName": "",
+			"age": 0,
+			"currency": "RUB",
+			"country": "Russia",
+			"city": "",
+			"userName": "Nikita",
+			"avatar": "",
+			"id": "bd125bc7"
 		}
 	],
 	"articles": [
@@ -573,7 +570,7 @@
 			]
 		},
 		{
-			"id": "18",
+			"id": "19",
 			"title": "Научная статья - Биология",
 			"subtitle": "БиологиЯ",
 			"img": "https://teknotower.com/wp-content/uploads/2020/11/js.png",
@@ -733,6 +730,20 @@
 			"userId": "1",
 			"rate": 1,
 			"feedback": "adsfasdfsadf"
+		},
+		{
+			"id": "cfc819a186a",
+			"articleId": "6",
+			"userId": "bd125bc7",
+			"rate": 4,
+			"feedback": "ddf"
+		},
+		{
+			"id": "edfcc10e10d",
+			"articleId": "1",
+			"userId": "1",
+			"rate": 4,
+			"feedback": "d"
 		}
 	]
 }
